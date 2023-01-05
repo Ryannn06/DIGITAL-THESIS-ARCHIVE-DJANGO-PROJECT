@@ -1,0 +1,15 @@
+<li class="nav-item dropdown">
+  <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Repository</i>
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    <li>
+      <a class="dropdown-item" href="{% url 'add' %}">Add Project</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{% url 'manageApproved' %}">Approved Projects</a>
+    </li>
+    <li><a class="dropdown-item" href="{% url 'managePending' %}">Pending Projects</a></li>
+    <li><a class="dropdown-item" href="{% url 'manageRejected' %}">Rejected Projects</a></li>
+  </ul>
+</li>

@@ -1,0 +1,87 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load hitcount_tags %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/Admin/ThesisDetails.css' %}?{% now "U" %}"">
+{% include 'Navibar.html' %}
+
+<div class="container-fluid content">
+	<div class="row mainbody">
+		<div class="col-lg-12 thesisdetail">
+			<div class="mb-3">
+				<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-danger">
+					<i class="bi bi-arrow-left-circle pe-1"></i>Back to previous page
+				</a>
+			</div>
+			<div>
+				<h5>
+					{{detail.title}}
+					{% if detail.published_status == 'Approved' %}
+						<span class="badge bg-success ms-3">Approved</span>
+					{% elif detail.published_status == 'Rejected' %}
+						<span class="badge bg-danger ms-3">Rejected </span>
+					{% endif %}
+				</h5>
+			</div>
+
+			<div class="details">
+				<p class="m-0"><i class="bi bi-person pe-1"></i>By
+                    {% for author in detail.thesis.all %}
+                    <span class="me-1">{{author.first_name}} {{author.middle_initial}} {{author.last_name}}</span>
+                    {% endfor %}
+                </p>
+                <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Adviser:
+                    {{detail.adviser}}
+                </p>
+				<p class="m-0"><i class="bi bi-building pe-1"></i>Course: {{detail.course}}</p>
+				<p class="m-0"><i class="bi bi-calendar pe-1"></i>Published Date: {{detail.published_date}}</p>
+				<p class="m-0"><i class="bi bi-calendar pe-1"></i>Date Uploaded: {{detail.date_created}}</p>
+				<p class="m-0"><i class="bi bi-person pe-1"></i>Uploader: {{detail.uploaded_by}}</p>
+
+				{% if detail.published_status == 'Approved' %}
+					<p class="m-0"><i class="bi bi-eye pe-1"></i>Views: {% get_hit_count for detail %}</p>
+				{% endif %}
+
+				<div class="tags m-0">
+				    <i class="bi bi-tags pe-1"></i>Keywords:
+				    {% for tag in detail.tags.all %}
+				        <a href="{% url 'tagged' tag.slug %}" class="textmaroon text-decoration-none">{{tag}}</a>
+				    {% endfor %}
+				</div>
+				<p><i class="bi bi-file-pdf pe-1"></i>
+					<a href="{{detail.pdf.url}}" class="text-decoration-none" target="blank_">
+						View PDF File
+					</a>
+				</p>
+			</div>
+
+			<div class="abstract">
+				{% include "MainRepository/abstract.html"%}
+			</div>
+
+			{% if detail.published_status == 'Rejected' %}
+			<div class="reason">
+				<p>Reason for Rejection: {{detail.reason}}</p>
+			</div>
+			{% endif %}
+
+			<div>
+				<h5 class="textmaroon">Recommended Citations</h5>
+				<p class="mb-0 textmaroon">APA</p>
+				<p>{{detail.apa}}</p>
+
+				<p class="mb-0 textmaroon">MLA</p>
+				<p>{{detail.mla}}</p>
+
+				<p class="mb-0 textmaroon">Chicago</p>
+				<p>{{detail.chicago}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% endblock %}

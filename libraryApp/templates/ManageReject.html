@@ -1,0 +1,100 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/Admin/Manage.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+<div class="container-fluid managecontainer">
+    <div class="row managecontent">
+        <div class="col-lg-12">
+            <div class="card cardheader p-3">
+              <div class="row welcomebanner">
+                <div class="col-lg-9 welcometext">
+                    <h4>Rejected Projects</h4>
+                    <p>This is the management repository for rejected thesis projects in
+                        the system
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                  <img class="img-fluid" src="{% static 'Images/Dashboard.svg' %}" alt='dashboard'>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 mt-5">
+            <h4 class="textmaroon">Graph Data</h4>
+            <p>Showing graph for the number of pending projects under registered courses</p>
+            <hr></hr>
+            <div>
+                <canvas class="card p-3" id="myBar" height="350vh"></canvas>
+            </div>
+        </div>
+
+        <div class="col-lg-12 mt-5">
+            <h4 class="textmaroon">Rejected Projects</h4>
+            <p>Showing results for the rejected projects</p>
+            <hr></hr>
+            <div>{% include 'Admin/rejectedtable.html' %}</div>
+        </div> 
+
+    </div>
+</div>
+
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#reject_table').dataTable();
+    });
+
+    var bar = document.getElementById('myBar');
+    var no_of_data = [{%for data in course%}'{{data.count}}',{%endfor%}];
+    var frameworks = [{%for data in course%}'{{data.course_name}}',{%endfor%}];
+    var option = {
+        reponsive: true,
+        maintainAspectRatio: false,
+        legend: {
+            labels: {
+                fontColor: "",
+                fontSize: 14,
+            }
+        },
+        scales: {
+            yAxes: [{   
+                beginAtZero: true,    
+                stacked: true,
+                gridLines: {
+                display: true,
+                color: "rgba(255,99,132,0.2)"
+                }
+            }],
+            xAxes: [{
+                gridLines: {
+                display: false
+                }
+            }]
+        }
+    };
+
+    var myBar = new Chart(bar, {
+        type: 'bar',
+        data: {
+            labels: frameworks,
+            datasets: [{
+                label: 'Rejected Projects',
+                data: no_of_data,
+                backgroundColor: "#3F3D56",
+                borderColor: "#3F3D56",
+                borderWidth: 1,
+                hoverBackgroundColor: "#0D6EFD",
+                hoverBorderColor: "#0D6EFD",
+                }],
+        },
+        options : option,
+    });
+</script>
+{% endblock scripts %}
+
+
+{% endblock %}

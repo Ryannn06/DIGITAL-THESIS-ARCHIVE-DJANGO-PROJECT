@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/PDFRequest/requestpdf.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid requestcontainer">
+	<div class="row">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8 requestcontent">
+			<h4 class="text-maroon">Your request is PENDING</h4>
+			<p>Your request to access the document file of the thesis project entitled
+				<span class="thesistitle">"{{detail.title}}"</span>
+			has successfully been sent and is currently pending. In the meantime, we ask you to wait until the confirmation of your request.</p>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>
+
+{% include 'Footer.html' %}
+
+{% endblock %}

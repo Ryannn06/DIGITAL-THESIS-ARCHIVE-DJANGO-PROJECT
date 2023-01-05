@@ -1,0 +1,44 @@
+.managecontainer {
+	padding: 5rem 5rem 5rem 5rem;
+	font-family: Lato;
+}
+
+.managecontent {
+	margin-top: 3rem;
+}
+
+.cardheader {
+	background: #3F3D56;
+}
+
+.welcomebanner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #FFFFFF;
+}
+
+.textmaroon {
+	color: #800000;
+	text-decoration: none;
+}
+
+.table, table {
+	font-size: 16px;
+}
+
+table, th, td {
+  margin: 0px !important;
+  border-collapse: collapse;
+}
+
+@media screen and (max-width: 1150px) {
+	.managecontainer {
+		padding: 2.5rem;
+	}
+	.table, #editor {
+		display: block;
+		overflow-x: auto !important;
+		width: 100% !important;
+	}
+}

@@ -1,0 +1,149 @@
+.content {
+	padding: 5rem 5rem 5rem 5rem;
+}
+
+.mainbody {
+	display: flex;
+	gap: 1.5rem;
+	justify-content: center;
+}
+
+.thesisdetail {
+  border-bottom: 2px solid #800000;
+}
+
+.heading {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.heading > h4, .heading > h2 {
+	margin: 0 0 0 0;
+	font-family: Poppins;
+}
+
+.heading > h2 {
+	color: #800000;
+}
+
+.details {
+	margin: 0 0 0 0;
+}
+
+.details > p {
+	margin: 0 0 0 0;
+	font-family: Inter;
+	font-size: 16px;
+}
+
+.abstract > h4 {
+	margin: 0 0 0 0;
+	font-family: Poppins;
+	text-align: center;
+}
+
+.abstract > p {
+	font-family: Inter;
+	font-size: 16px;
+	text-align: justify;
+	text-indent: 40px;
+}
+
+.card {
+		background: #F9F9FB;
+		padding: 3rem;
+		min-height: 100vh;
+		margin: 2.5rem 0 2.5rem 0;
+}
+
+.citation > h4 {
+	margin: 0 0 0 0;
+	font-family: Poppins;
+}
+
+.format {
+	margin: 0 0 0 0;
+	font-family: Poppins;
+	font-size: 16px;
+}
+
+.cite {
+	font-family: Inter;
+	font-size: 16px;
+	text-align: justify;
+}
+
+.authordetail, .file {
+	margin: 0 0 0 0;
+}
+
+.authordetail > p, .file > p {
+	margin: 0 0 0 0;
+	font-family: Inter;
+	font-size: 16px;
+}
+
+.authordetail > h4, .file > h4 {
+	margin: 0 0 0 0;
+	font-family: Poppins;
+}
+
+.otherdetail {
+	margin: 2rem 0 0 0;
+}
+
+.otherdetail > p {
+	margin: 0 0 0 0;
+	font-family: Inter;
+	font-size: 16px;
+}
+
+.otherdetail > h4 {
+	margin: 0 0 0 0;
+	font-family: Poppins;
+}
+
+.containingcard {
+	margin: 1rem 0 0 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.cards {
+	width: 48%;
+	background: #F9F9FB;
+	padding: 1rem;
+	border-left: 2px solid #800000;
+}
+
+.title {
+  font-family: Poppins;
+}
+
+.title > a {
+  text-decoration: none;
+  color: black;
+}
+
+.contents, .tags > a {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.tags > a {
+  color: #800000;
+}
+
+.image_banner {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+.image_banner > img {
+	max-height: 40vh;
+	max-width: auto;
+}

@@ -1,0 +1,36 @@
+.heading {
+	margin: 0 0 0 0;
+	padding: 5rem 5rem 0rem 5rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 1.5rem;
+	font-family: Inter !important;
+}
+
+.card {
+	width: 30%;
+	padding: 1.5rem;
+	margin-top: -10rem;
+	background: #800000;
+}
+
+.cardbody {
+	color: #FFFFFF;
+}
+
+.cardbody > p {
+	font-size: 16px;
+}
+
+@media (max-width: 992px) {
+	.heading {
+		flex-wrap: nowrap;
+		flex-direction: column;
+	}
+	.card {
+		width: 100%;
+		margin-top: 0;
+	}
+}

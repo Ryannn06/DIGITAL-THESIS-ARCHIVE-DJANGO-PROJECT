@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/MainRepository/thesis.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid thesiscontainer">
+
+	<div class="mb-3">
+	    <h6>
+	    	<a href="{% url 'thesis' %}" class="textmaroon text-decoration-none">
+	    		Home
+	    	</a>
+	        {% if tag %}
+	            <span class="filter_key"><i class="bi bi-chevron-right"></i>Collection for keyword '{{tag}}'</span>
+	        {% endif %}
+	    </h6>
+	</div>
+
+	<div class="row mb-5">
+		<div class="col-lg-12">
+		 	<form class="searchbar">
+		   		<input type="text" class="form-control" placeholder="Search for in this repository..." name="search_paper">
+		   		<button class="btn" type="submit">Search</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="row mb-5">
+		<h4 class="textmaroon">Collection for keyword '{{tag}}'</h4>
+		<p>Collection of thesis papers with keyword '{{tag}}'</p>
+		<hr></hr>
+		{% if search_paper %}
+		<h5 class="textmaroon p-3"><i class="bi bi-search pe-1"></i>
+			Showing results for '{{search_paper}}'
+		</h5>
+		{% endif %}
+		{% include 'MainRepository/tag_repository_display.html'%}
+		
+		{% if thesis_details.has_other_pages %}
+		<div class="col-lg-12">
+		<div class="btn-group float-end paginating" role="group" aria-label="Item pagination">
+		    {% if thesis_details.has_previous %}
+		        <a href="?page={{ thesis_details.previous_page_number }}" class="btn btn-prev btn-outline-danger">
+		            Prev
+		        </a>
+		    {% endif %}
+
+		    {% for page_number in thesis_details.paginator.page_range %}
+		        {% if thesis_details.number == page_number %}
+		            <button class="btn btn-active btn-danger">
+		                <span>{{ page_number }} <span class="sr-only"></span></span>
+		            </button>
+		        {% else %}
+		            <a href="?page={{ page_number }}" class="btn btn-pending btn-outline-danger">
+		                {{ page_number }}
+		            </a>
+		        {% endif %}
+		    {% endfor %}
+
+		    {% if thesis_details.has_next %}
+		        <a href="?page={{ thesis_details.next_page_number }}" class="btn btn-next btn-outline-danger">
+		            Next
+		        </a>
+		    {% endif %}
+		</div>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+{% include 'Footer.html' %}
+
+{% endblock %}

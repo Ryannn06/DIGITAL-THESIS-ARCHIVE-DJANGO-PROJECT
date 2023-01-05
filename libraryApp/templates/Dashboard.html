@@ -1,0 +1,169 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/Admin/Dashboard.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid dashboardcontainer">
+    <div class="dashboardbody">
+      <!-- content -->
+      <section class="dashboardcontent">
+
+          <div class="row topsection">
+            <div class="col">
+
+              <div class="card cardheader p-3 mb-4">
+                <div class="row welcomebanner">
+                  <div class="col-lg-9 welcometext">
+                    <h4>Dashboard</h4>
+                    <p>Welcome back<a href="{% url 'profile_staff' %}">
+                    {{user.first_name}} {{user.last_name}}</a>!</p>
+                  </div>
+                  <div class="col-lg-3">
+                    <img class="img-fluid" src="{% static 'Images/Dashboard.svg' %}" alt='dashboard'>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row mb-4 secondsection">
+
+            <div class="col-lg-3">
+              <div class="row">
+                <div class="col">
+                  <div class="card text-center p-3 mb-4">
+                    <h1 class="">{{new_book}}</h1>
+                    <p class="mb-0">Today's Projects</p>
+                    <i class="bi bi-bar-chart fs-1"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="card text-center mb-4 p-3">
+                    <h1 class="">{{book_available}}</h1>
+                    <p class="mb-0">Approved Projects</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-5">
+              <canvas id="myBar" height="200vh"></canvas>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="row">
+                  <div class="col">
+                    <div class="card text-center p-3 mb-4">
+                      <h1 class="">{{total_dept}}</h1>
+                      <p class="mb-0">Departments</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="card coursecard text-center mb-4 p-3">
+                      <h1 class="">{{total_course}}</h1>
+                      <p class="mb-0">Courses</p>
+                      <i class="bi bi bi-graph-up fs-1"></i>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="row mb-4 thirdsection text-center">
+            <div class="col-lg-3 mb-4">
+              <i class="bi bi-check2-circle fs-1"></i>
+              <h1 class="">{{pdfaccess_approved}}</h1>
+              <p class="mb-0">Approved PDF Access Requests</p>
+            </div>
+            <div class="col-lg-3 mb-4">
+              <i class="bi bi-chat-square-dots-fill fs-1"></i>
+              <h1 class="">{{pdfaccess_pending}}</h1>
+              <p class="mb-0">Pending PDF Access Requests</p>
+            </div>
+            <div class="col-lg-6 mb-0">
+              <canvas id="myChart" class="card chartcard p-3"></canvas>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+</div>
+
+{% block script %}
+<script type="text/javascript">
+var ctx = document.getElementById('myChart');
+var ctx_bar = document.getElementById('myBar')
+
+var no_of_data = [{{pdfaccess_approved}}, {{pdfaccess_pending}}];
+var frameworks = ["Approved Requests", "Pending Requests"];
+
+var option = {
+    reponsive: true,
+    legend: {
+        labels: {
+            fontColor: "#FFFFFF",
+            fontSize: 14,
+        }
+    },
+};
+
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: frameworks,
+        datasets: [{
+            label: 'PDF Access Requests',
+            data: no_of_data,
+            backgroundColor: ["#C8303F", "#FFFFFF"],
+            borderColor: ["#C8303F", "#FFFFFF"],
+            borderWidth: 1,
+            hoverBackgroundColor: ["#C8303F", "#FFFFFF"],
+            hoverBorderColor: "#0D6EFD",
+            }],
+    },
+    options : option,
+});
+
+var no_of_data_bar = [{{thesis_pending}}, {{thesis_reject}}];
+var frameworks_bar = ["Pending Projects", "Rejected Projects"];
+
+var option_bar = {
+    reponsive: true,
+    legend: {
+        labels: {
+            fontSize: 16,
+        }
+    },
+};
+
+var myBar = new Chart(ctx_bar, {
+    type: 'bar',
+    data: {
+        labels: frameworks_bar,
+        datasets: [{
+            label: 'Thesis Projects',
+            data: no_of_data_bar,
+            backgroundColor: ["#641EA2", "#4B42B6", "#C8303F"],
+            borderColor: ["#641EA2", "#4B42B6", "#C8303F"],
+            borderWidth: 1,
+            hoverBackgroundColor: ["#641EA2", "#4B42B6", "#C8303F"],
+            hoverBorderColor: "#0D6EFD",
+            }],
+    },
+    options : option_bar,
+});
+
+</script>
+{% endblock script %}
+
+{% endblock %}

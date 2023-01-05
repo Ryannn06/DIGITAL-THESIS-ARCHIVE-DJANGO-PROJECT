@@ -1,0 +1,35 @@
+.coursecontainer {
+	padding: 5rem 5rem 5rem 5rem;
+}
+
+.coursecontent {
+	margin-top: 3rem;
+	font-family: Lato;
+}
+
+.textmaroon {
+	color: #800000;
+	text-decoration: none;
+}
+
+.cardheader {
+	background: #3F3D56;
+}
+
+.welcomebanner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #FFFFFF;
+}
+
+@media screen and (max-width: 1150px) {
+	.coursecontainer {
+	    padding: 2.5rem;
+	}
+		.table, #editor {
+		display: block;
+		overflow-x: auto !important;
+		width: 100% !important;
+	}
+}

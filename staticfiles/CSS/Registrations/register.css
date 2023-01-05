@@ -1,0 +1,45 @@
+.asteriskField {
+    display: none;
+}
+
+.container-fluid {
+	margin: 0 0 0 0;
+	padding: 5rem 5rem 5rem 5rem;
+	font-family: Lato;
+}
+
+.registerrow {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loginform {
+	font-size:16px;
+} 
+
+.loginform > a {
+	text-decoration: none;
+}
+
+.textmaroon {
+	color: #800000;
+	text-decoration: none;
+}
+
+.cardwarning {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #ffffff;
+}
+
+.cardwarning > p > a {
+	color: #ffffff;
+}
+
+@media (max-width: 1150px) {
+	.container-fluid {
+		padding: 2.5rem;
+	}
+}

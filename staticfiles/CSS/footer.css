@@ -1,0 +1,41 @@
+.footer {
+  background: #800000;
+  padding: 2.5rem 5rem 2.5rem 5rem;
+  font-family: Lato;
+}
+
+.footerbody {
+  display: flex;
+  flex: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.about > h5, .navlink > h5, .contacts > h5 {
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.navlink {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navlink > p > a, .about > p, .contacts > p, .brand > p {
+  color: #FFFFFF;
+  text-decoration: none;
+  text-align: justify;
+}
+
+.footerbottom {
+  color: #FFFFFF;
+  text-align: center;
+}
+
+@media (max-width: 1150px) {
+  .footer {
+    padding: 1.5rem;
+  }
+}

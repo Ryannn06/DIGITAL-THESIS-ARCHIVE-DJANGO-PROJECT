@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/home.css' %}?{% now "U" %}"">
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/accounts.css' %}?{% now "U" %}"">
+
+<div class="container-fluid">
+  <div class="row cards m-5">
+    <div>
+      <a href="{% url 'home' %}" class="text-decoration-none exa ps-5 pt-5"><i class="bi bi-arrow-left-circle fs-1"></i></a>
+    </div>
+    <div class="col ps-5 pe-5 pt-5 pb-5">
+      <img src="/static/images/undraw_moving_re_pipp.svg" class="img-fluid">
+    </div>
+    <div class="col-md-5 pe-5 ps-5 pt-5 pb-5">
+      <p class="title text-uppercase mb-0">Take a <u class="title">break?</u></p>
+      <p class="textcon">Pause for a while. Breathe. And Lossen Up.</p>
+      <a href="{% url 'logout' %}" class="btn btn-danger mt-3 mb-3 form-control">Yes, I want to leave<i class="bi bi-arrow-right-circle ps-2"></i></a>
+      <p class="textcon text-center"><a href="{{request.META.HTTP_REFERER|escape}}" class="text-decoration-none">I change my mind</a></p>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

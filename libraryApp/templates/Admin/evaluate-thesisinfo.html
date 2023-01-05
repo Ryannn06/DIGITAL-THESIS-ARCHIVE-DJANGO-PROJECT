@@ -1,0 +1,34 @@
+<table style="width:100%" class="table">
+  <tr class="row">
+    <th class="col-lg-5">Image</th>
+    {% if image_banner %}
+    <td class="col-lg-7">View Image<a href="{{detail.image_banner.url}}"></a></td>
+    {% else %}
+    <td class="col-lg-7">No Image Avaliable</td>
+    {% endif %}
+  </tr>
+  <tr class="row">
+    <th class="col-lg-5">Title</th>
+    <td class="col-lg-7">{{detail.title}}</td>
+  </tr>
+  <tr class="row">
+    <th class="col-lg-5">Author</th>
+    <td class="col-lg-7">{{detail.author}}</td>
+  </tr>
+  <tr class="row">
+    <th class="col-lg-5">Course</th>
+    <td class="col-lg-7">{{detail.course}}</td>
+  </tr>
+  <tr class="row">
+    <th class="col-lg-5">Publication Date</th>
+    <td class="col-lg-7">{{detail.published_date}}</td>
+  </tr>
+  <tr class="row">
+    <th class="col-lg-5">Submitted By</th>
+    <td class="col-lg-7">{{detail.uploaded_by}}</td>
+  </tr>
+  <tr class="row">
+    <th class="col-lg-5">Submitted Date</th>
+    <td class="col-lg-7">{{detail.date_created}}</td>
+  </tr>
+</table>

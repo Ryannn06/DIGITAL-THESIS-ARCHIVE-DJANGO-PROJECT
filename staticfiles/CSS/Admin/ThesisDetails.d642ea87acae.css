@@ -1,0 +1,58 @@
+.content {
+	padding: 5rem 5rem 5rem 5rem;
+	margin-top: 3rem;
+	font-family: Lato;
+}
+
+.mainbody {
+	display: flex;
+	gap: 1.5rem;
+	justify-content: center;
+}
+
+.thesisdetail {
+  border-bottom: 2px solid #800000;
+  display: flex;
+  flex-direction:column;
+}
+
+.heading {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+}
+
+.abstract-body {
+	font-size: 16px;
+	text-align: justify;
+}
+
+.cite {
+	font-size: 16px;
+	text-align: justify;
+}
+
+.details {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.textmaroon {
+	color: #800000;
+}
+
+.reason > p {
+	text-decoration: underline;
+	color: #800000;
+}
+
+@media (max-width: 1150px) {
+	.content {
+		padding: 2.5rem;
+	}
+	.details {
+		flex-direction: column;
+		gap: 0rem;
+	}
+}

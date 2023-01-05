@@ -1,0 +1,46 @@
+.managecontainer {
+	padding: 5rem 5rem 5rem 5rem;
+}
+
+.managecontent {
+	margin-top: -10rem;
+}
+
+.managecontent > h2, .managecontent >h4 {
+	font-family: Inter;
+	line-height: 1;
+}
+
+.managecontent > p {
+	font-family: Inter;
+	font-size: 16px;
+}
+
+.paratext {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-family: Inter;
+	font-size: 16px;
+}
+
+.table, table {
+	font-family: Inter;
+	font-size: 16px;
+}
+
+table, th, td {
+  margin: 0px !important;
+  border-collapse: collapse;
+}
+
+@media screen and (max-width: 1140px) {
+	.paratext {
+		flex-direction: column;
+	}
+	.table, #editor {
+		display: block;
+		overflow-x: auto !important;
+		width: 100% !important;
+	}
+}

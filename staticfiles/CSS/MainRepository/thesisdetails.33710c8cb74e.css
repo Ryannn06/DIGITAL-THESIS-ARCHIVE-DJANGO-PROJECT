@@ -1,0 +1,73 @@
+.content {
+	padding: 5rem 5rem 5rem 5rem;
+}
+
+.mainbody {
+	display: flex;
+	gap: 1.5rem;
+	justify-content: center;
+	font-family: Inter;
+}
+
+.thesisdetail {
+  border-bottom: 2px solid #800000;
+}
+
+.heading {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+}
+
+.heading > h4, .heading > h2 {
+	margin: 0 0 0 0;
+	font-family: Inter;
+}
+
+.heading > h2 {
+}
+
+.abstract > h4 {
+	margin: 0 0 0 0;
+	font-family: Arial !important;
+	text-align: center;
+}
+
+.abstract > p {
+	font-family: Arial !important;
+	font-size: 16px;
+	text-align: justify;
+	text-indent: 40px;
+}
+
+.card {
+		background: #F9F9FB;
+		padding: 3rem;
+		min-height: 100vh;
+		margin: 2.5rem 0 2.5rem 0;
+}
+
+.cite {
+	font-family: Inter;
+	font-size: 16px;
+	text-align: justify;
+}
+
+.image_banner {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+
+.image_banner > img {
+	max-height: 40vh;
+	max-width: auto;
+}
+
+.details {
+	margin-left: 1rem;
+}
+
+.uploaderdetails {
+	margin-left: 1rem;
+}

@@ -1,0 +1,25 @@
+<table id="book_table" class="table table-hover table-bordered"  style="width: 100%;">
+  <thead>
+    <tr>
+      <th scope="col">Requestor</th>
+      <th scope="col">Email</th>
+      <th scope="col">Thesis</th>
+      <th scope="col">Date Requested</th>
+      <th class="no-sort" scope="col">Actions</th>
+    </tr>           
+  </thead>
+
+  <tbody>
+
+    {% for detail in details %}
+    <tr>
+      <td>{{detail.user}}</td>
+      <td>{{detail.user.email}}</td>
+      <td>{{detail.thesis.title}}</td>
+      <td>{{detail.request_date}}</td>
+      <td><a href="{% url 'evaluateRequests' detail.id %}" class="text-decoration-none btn btn-primary">Evaluate</a></td>
+    </tr>
+    {% endfor %}        
+
+  </tbody>
+</table>

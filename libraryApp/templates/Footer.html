@@ -1,0 +1,41 @@
+{% load static %}
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/footer.css' %}?{% now "U" %}"">
+
+
+<div class="container-fluid footer">
+  <div class="row footerbody">
+    <div class="col about">
+      <h5>About</h5>
+      <p>A Thesis Archive Management System for Technological University of The Philippines- Cavite for the digital preservation and management of thesis documents of the university.</p>
+    </div>
+    <div class="col contacts">
+      <h5>Get in Touch</h5>
+      <p>Salawag, Dasmarinas Cavite</p>
+      <p>+639471054225</p>
+      <p>repository@gmail.com</p>
+      <p>Mon - Fri, 8AM - 7PM</p>
+    </div>
+    <div class="col navlink">
+      <h5 class="">Quick Links</h5>
+      {% if user.is_authenticated and user.is_student %}
+        <p><a href="{% url 'home' %}">Home</a></p>
+        <p><a href="{% url 'profile' %}">Account</a></p>
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+      {% else %}
+        <p><a href="{% url 'login' %}">Login</a></p>
+        <p><a href="{% url 'register' %}">Signup</a></p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row footerbottom">
+    <hr>
+    <p>All rights reserved @ 2023</p>
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}

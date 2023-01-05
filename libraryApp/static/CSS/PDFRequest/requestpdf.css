@@ -1,0 +1,21 @@
+.requestcontainer {
+  margin: 0 0 0 0;
+  padding: 5rem 5rem 5rem 5rem;
+}
+
+.requestcontent {
+  text-align: justify;
+  min-height: 50vh;
+  font-family: Lato;
+}
+
+.thesistitle {
+  color: #800000;
+  font-weight: bold;
+}
+
+@media (max-width: 1150px) {
+  .requestcontainer {
+    padding: 2.5rem;
+  }
+}

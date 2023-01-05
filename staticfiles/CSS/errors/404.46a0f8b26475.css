@@ -1,0 +1,14 @@
+.errorcontainer {
+  margin: 0 0 0 0;
+  padding: 5rem 5rem 5rem 5rem;
+}
+
+.errorbody > h1, .errorbody > h2  {
+  font-family: Poppins;
+  color: #800000;
+}
+
+.errorbody > p {
+  font-family: Inter;
+  font-size: 16px;
+}

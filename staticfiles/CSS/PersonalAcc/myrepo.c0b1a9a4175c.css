@@ -1,0 +1,23 @@
+.repocontainer {
+  margin: 0 0 0 0;
+  padding: 5rem 5rem 5rem 5rem;
+  font-family: Lato;
+}
+
+.textmaroon {
+  color: #800000;
+  text-decoration: none;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0;
+}
+
+@media (max-width: 1150px) {
+  .repocontainer {
+    padding: 2.5rem;
+  }
+}

@@ -1,0 +1,36 @@
+.evaluatecontainer {
+	padding: 5rem 5rem 5rem 5rem;
+	font-family: Lato;
+}
+
+.evalbodycontainer {
+	margin-top: 3rem;
+}
+
+.cardheader {
+	background: #3F3D56;
+}
+
+.welcomebanner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #FFFFFF;
+}
+
+.textmaroon {
+	text-decoration: none;
+	color: #800000;
+}
+
+.topbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@media screen and (max-width: 1150px) {
+	.evaluatecontainer {
+	    padding: 2.5rem;
+	}
+}

@@ -1,0 +1,32 @@
+.evaluatecontainer {
+	padding: 5rem 5rem 5rem 5rem;
+	font-family: Inter;
+}
+
+.evalbodycontainer {
+	margin-top: -10rem;
+}
+
+.userinfo {
+	border-left: 2px solid #800000;
+	padding-left: 1rem;
+	margin-left: 1rem;
+}
+
+.thesisinfo {
+	border-left: 2px solid #800000;
+	padding-left: 1rem;
+	margin-left: 1rem;
+}
+
+.evalform {
+	border-left: 2px solid #800000;
+	padding-left: 1rem;
+	margin-left: 1rem;
+}
+
+@media screen and (max-width: 1150px) {
+	.evaluatecontainer {
+	    padding: 2.5rem;
+	}
+}

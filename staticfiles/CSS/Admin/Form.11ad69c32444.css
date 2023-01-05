@@ -1,0 +1,40 @@
+.subcontainer {
+	padding: 5rem 5rem 5rem 5rem;
+}
+
+.card {
+	padding: 1.5rem;
+}
+
+.bodycontent > h2, .bodycontent >h4 {
+	font-family: Inter;
+	line-height: 1;
+}
+
+.bodycontent > p, .post-form {
+	font-family: Inter;
+	font-size: 16px;
+}
+
+.bodycontent > a {
+  text-decoration: none;
+  background: #800000;
+}
+
+.button-up {
+  border-radius:0px;
+  border: none;
+  padding: 8px;
+  font-family: Inter;
+  background: #800000;
+  color: #FFFFFF;
+}
+
+.button-res {
+  border-radius:0px;
+  border: none;
+  padding: 8px;
+  font-family: Inter;
+  background: black;
+  color: #FFFFFF;
+}

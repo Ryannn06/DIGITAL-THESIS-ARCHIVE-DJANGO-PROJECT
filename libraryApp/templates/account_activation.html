@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/Registrations/login.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid">
+  <div class="row loginrow">
+    <div class="col-lg-6 col-sm-12 left_section">
+      <img class="img-fluid" src="{% static 'Images/Login.svg' %}" alt='password'>
+    </div>
+    <div class="col-lg-6 col-sm-12 right_section">
+      <h4 class="textmaroon">Email Verification Has Been Sent<i class="bi bi-check-circle ps-1 fs-1"></i></h4>
+      <p class="textcon">Please confirm your email address to complete the registration
+      </p>
+      <div class="d-flex align-items-center">
+      	<a href="{% url 'home' %}" class="btn btn-danger">Okay &raquo;</a>
+      </div>     
+    </div>
+
+  </div>
+</div>
+
+{% include 'Footer.html' %}
+{% endblock%}

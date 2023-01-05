@@ -1,0 +1,53 @@
+.dashboardcontainer {
+	padding: 5rem 5rem 5rem 5rem;
+	font-family: Lato;
+}
+
+.dashboardbody {
+	margin-top: 3rem;
+}
+
+.cardheader {
+	background: #3F3D56;
+}
+
+.welcomebanner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #FFFFFF;
+}
+
+.welcometext > p > a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+.secondsection, .thirdsection {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #641EA2;
+}
+
+.coursecard {
+	color: #FFFFFF !important;
+	background:  #641EA2;
+}
+
+.pdfpendingcard {
+	min-height: 50vh;
+	display: flex;
+	align-items: center;
+}
+
+.chartcard {
+	color: #FFFFFF !important;
+	background:  #641EA2;	
+}
+
+@media (max-width: 1150px) {
+	.dashboardcontainer {
+		padding: 2.5rem;
+	}
+}

@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load hitcount_tags %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/MainRepository/thesisdetails.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid content">
+	<div class="row mainbody">
+		<div class="col-lg-12 thesisdetail">
+			<div class="mb-3">
+				<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-danger">
+					<i class="bi bi-arrow-left-circle pe-1"></i>Back to previous page
+				</a>
+			</div>
+			<div>
+				<h5>{{detail.title}}</h5>
+			</div>
+
+			<div class="details">
+				<p class="m-0"><i class="bi bi-person pe-1"></i>By
+                    {% for author in authors %}     
+                    <span class="me-1">{{author.first_name}} {{author.middle_initial}} {{author.last_name}}</span>
+                    {% endfor %}
+                </p>
+                <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Adviser
+                    {{detail.adviser}}
+                </p>
+				<p class="m-0"><i class="bi bi-building pe-1"></i>{{detail.course}}</p>
+				<p class="m-0"><i class="bi bi-calendar pe-1"></i>Published in {{detail.published_date}}</p>
+				<p class="m-0"><i class="bi bi-eye pe-1"></i>{% get_hit_count for detail %} views</p>
+				<div class="tags m-0">
+				    <i class="bi bi-tags pe-1"></i>
+				    {% for tag in detail.tags.all %}
+				        <a href="{% url 'tagged' tag.slug %}" class="textmaroon text-decoration-none">{{tag}}</a>
+				    {% endfor %}
+				</div>
+				<p><i class="bi bi-file-pdf pe-1"></i>
+					<a href="{% url 'viewPDF' detail.slug %}" class="text-decoration-none" target="blank_">
+						View PDF File
+					</a>
+				</p>
+			</div>
+
+			<div class="abstract mb-3">
+				{% include "MainRepository/abstract.html"%}
+			</div>
+
+			<div class="mb-3">
+				<h5 class="textmaroon">Recommended Citation</h5>
+				{% include "MainRepository/citationcanvas.html"%}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% include 'Footer.html' %}
+
+{% block scripts %}
+<script>
+	function CopyToClipboard(id)
+	  {
+	    var r = document.createRange();
+	    r.selectNode(document.getElementById(id));
+	    window.getSelection().removeAllRanges();
+	    window.getSelection().addRange(r);
+	    document.execCommand('copy');
+	    window.getSelection().removeAllRanges();
+	}
+</script>
+{% endblock scripts %}
+
+{% endblock %}

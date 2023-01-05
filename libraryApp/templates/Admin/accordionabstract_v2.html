@@ -1,0 +1,17 @@
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="heading{{post.slug}}">
+      <h5 class="mb-0">
+        <button class="btn" data-bs-toggle="collapse" data-bs-target="#collapse{{post.slug}}" aria-expanded="true" aria-controls="collapse{{post.slug}}">
+          Abstract<i class="bi bi-chevron-down ps-1"></i>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse{{post.slug}}" class="collapse show" aria-labelledby="heading{{post.slug}}" data-parent="#accordion">
+      <div class="card-body">
+        {{details.thesis.abstract}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/Admin/Manage.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid managecontainer">
+    <div class="managecontent">
+
+        <div class="card cardheader p-3">
+          <div class="row welcomebanner">
+            <div class="col-lg-9 welcometext">
+                <h4>Registered Accounts</h4>
+                <p>Here shows the registered accounts and their information in the system
+                </p>
+            </div>
+            <div class="col-lg-3">
+              <img class="img-fluid" src="{% static 'Images/Dashboard.svg' %}" alt='dashboard'>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 mt-5">
+            <h4 class="textmaroon">Registered Accounts</h4>
+            <p>Showing results for registered accounts</p>
+            <hr></hr> 
+            {% include 'Admin/registeredacctable.html' %}  
+        </div>
+
+    </div>
+</div>
+
+{% block scripts %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#regacc_table').dataTable();
+});
+</script>
+{% endblock scripts %}
+
+{% endblock %}

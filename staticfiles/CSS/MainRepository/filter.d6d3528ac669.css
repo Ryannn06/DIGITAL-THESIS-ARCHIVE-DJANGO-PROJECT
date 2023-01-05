@@ -1,0 +1,73 @@
+.textitle {
+  font-family: Inter;
+  background: #800000;
+  color: #FFFFFF;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category {
+  font-family: Inter;
+  font-size: 16px;
+}
+
+.listof {
+  font-family: Inter;
+  font-weight: 16px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+}
+
+.listof > a, .accordion-header > a {
+  margin: none;
+  text-decoration: none;
+  list-style: none;
+  border-left: 2px solid #800000;
+  padding: 5px;
+  color: black;
+}
+
+.listof > li {
+  margin: none;
+  text-decoration: none;
+  list-style: none;
+  border-left: 2px solid #800000;
+  padding: 5px;
+  color: black; 
+}
+
+.listof > li > a {
+  text-decoration: none;
+}
+
+.listof > a:hover, .panel > a:hover, .accordion-header > a:hover {
+  background: #800000;
+  color: #FFFFFF;
+  border-left: 2px solid #FFFFFF; 
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+}
+
+.panel > a {
+  margin: none;
+  text-decoration: none;
+  border-left: 2px solid #800000;
+  padding: 5px;
+  color: black;
+}
+
+.subca {
+  display: flex;
+  justify-content: space-between;
+}
+
+.number {
+  color: #800000;
+}

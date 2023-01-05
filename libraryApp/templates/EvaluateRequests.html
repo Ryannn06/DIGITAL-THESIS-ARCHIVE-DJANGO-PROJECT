@@ -1,0 +1,103 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load hitcount_tags %}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/Admin/Evaluate.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid evaluatecontainer">
+  <div class="evalbodycontainer">
+      <div class="card cardheader p-3">
+        <div class="row welcomebanner">
+          <div class="col-lg-9 welcometext">
+              <h4>Evaluate PDF Access Request</h4>
+              <p>Evaluate requested access for PDF here
+              </p>
+          </div>
+          <div class="col-lg-3">
+            <img class="img-fluid" src="{% static 'Images/Dashboard.svg' %}" alt='dashboard'>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 row">
+
+        <div class="col-lg-6">
+          <div class="card p-4">
+            <div class="content">
+              <h4 class="textmaroon mb-2">Requestor's Information</h4>
+              <p class="m-0"><i class="bi bi-person-circle pe-1"></i>Name: 
+                {{details.user.first_name}} {{details.user.last_name}}
+              </p>
+              <p class="m-0"><i class="bi bi-envelope pe-1"></i>Email: 
+                <a href="mailto:{{detail.user.email}}">{{details.user.email}}</a>
+              </p>
+              <p class="m-0"><i class="bi bi-calendar pe-1"></i>Date Requested: 
+                {{details.request_date}}
+              </p>
+              <p class="m-0"><i class="bi bi-chat-square pe-1"></i>Student's Reason: {{details.reason}}</p>
+              <a href="{% url 'acc_details' details.user.id %}" class="btn btn-danger mt-3">View more &raquo;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <ul class="list-group list-group-flush card p-3">
+              <li class="list-group-item m-0">
+                  <div>
+                      <h4><a class="text-decoration-none textmaroon" href="{% url 'view_thesis' details.thesis.slug %}" target="_blank">{{details.thesis.title}}
+                      </a></h4>
+                  </div>
+                  <div class="content">
+                      <p class="m-0"><i class="bi bi-person pe-1"></i>Author: 
+                        {% for author in details.thesis.thesis.all %}
+                        <span class="me-1">{{author.first_name}} {{author.last_name}}</span>
+                        {% endfor %}
+                      </p>
+                      <p class="m-0"><i class="bi bi-person pe-1"></i>Adviser: 
+                        {{details.thesis.adviser}}
+                      </p>
+                      <p class="m-0"><i class="bi bi-building pe-1"></i>Course: {{details.thesis.course}}</p>
+                      <p class="m-0"><i class="bi bi-calendar pe-1"></i>Published Date: {{details.thesis.published_date}}</p>
+                      <p class="m-0"><i class="bi bi-eye pe-1"></i>Views: {% get_hit_count for details.thesis %}</p>
+                      <p class="m-0"><i class="bi bi-file-pdf pe-1"></i>PDF File: 
+                          <a href="{{details.thesis.pdf.url}}" class="text-decoration-none" target="_blank">
+                          View PDF
+                          </a>
+                      </p>
+                      <p class="m-0"><i class="bi bi-calendar pe-1"></i>Submitted Date: {{details.thesis.date_created}}</p>
+                      <p class="m-0"><i class="bi bi-person pe-1"></i>Submitted by:
+                        {{details.thesis.uploaded_by}}
+                      </p>
+                      <div class="tags m-0">
+                          <i class="bi bi-tags pe-1"></i>Keywords:
+                          {% for tag in details.thesis.tags.all %}
+                              <a class="textmaroon">{{tag}}
+                              </a>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </li>
+          </ul>
+          <div class="mt-3">
+              {% include 'Admin/accordionabstract_v2.html' %}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-5 card p-4">
+        <h4 class="textmaroon">Evaluate</h4>
+        <form method="POST" class="form-group">
+          {% csrf_token %}
+          {{form|crispy}}
+          <button type="submit" class="btn btn-danger mt-3 float-end">Confirm</button>
+          <button type="submit" class="btn btn-secondary me-2 mt-3 float-end">Reset</button>
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

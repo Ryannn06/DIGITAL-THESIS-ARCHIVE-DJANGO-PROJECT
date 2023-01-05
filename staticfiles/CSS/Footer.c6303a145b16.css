@@ -1,0 +1,41 @@
+.footer {
+  background: #800000;
+  padding: 2.5rem 5rem 2.5rem 5rem;
+}
+
+.footerbody {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.about > h4, .navlink > h4, .contacts > h4 {
+  font-family: Inter;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.navlink {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navlink > p > a, .about > p, .contacts > p, .brand > p {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: Inter;
+  text-align: justify;
+}
+
+.brand > h1 {
+  font-family: Inter;
+  color: #FFFFFF;
+}
+
+.footerbottom {
+  color: #FFFFFF;
+  font-family: Inter;
+  text-align: center;
+}

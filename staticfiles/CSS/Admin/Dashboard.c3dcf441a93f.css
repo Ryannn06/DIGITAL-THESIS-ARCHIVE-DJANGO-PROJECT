@@ -1,0 +1,26 @@
+.dashboardcontainer {
+	padding: 2.5rem 5rem 5rem 5rem;
+}
+
+.welcomehead > h2 {
+	font-family: Poppins;
+	line-height: 1;
+	color: #800000;
+}
+
+.welcomehead > p {
+	font-family: Inter;
+	font-size: 14px;
+}
+
+.welcomehead > p > a {
+	font-family: Inter;
+	font-size: 14px;
+	text-decoration: none;
+	color: #800000;
+}
+
+.text-end, .text-danger, .text-success, .text-warning {
+	font-family: Inter;
+	font-size: 14px;
+}

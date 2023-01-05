@@ -1,0 +1,39 @@
+.card {
+  padding: 1rem;
+}
+
+.textitle {
+  font-family: Poppins;
+  background: #800000;
+  color: #FFFFFF;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category {
+  font-family: Inter;
+  font-size: 16px;
+}
+
+.listof {
+  font-family: Inter;
+  font-weight: 16px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+}
+
+.listof > a {
+  text-decoration: none;
+  border-left: 2px solid #800000;
+  padding: 5px;
+  color: black;
+}
+
+.listof > a:hover {
+  background: #800000;
+  color: #FFFFFF;
+  border-left: 2px solid #FFFFFF; 
+}

@@ -1,0 +1,64 @@
+.repocontainer {
+  margin: 0 0 0 0;
+  padding: 5rem 5rem 5rem 5rem;
+}
+
+.right_section > h4, .right_section > h2 {
+  font-family: Inter;
+}
+
+.content > p, .tags {
+  font-family: Inter;
+  font-size: 16px;
+}
+
+.reason > p, .reason > a {
+  font-family: Inter;
+  font-size: 16px;
+}
+
+.cardsdisplay {
+  display:flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background: #F9F9FB;
+  padding: 1rem;
+  border-left: 2px solid #800000;
+}
+
+.title {
+  font-family: Inter;
+}
+
+.title > a {
+  text-decoration: none;
+  color: #800000;
+}
+
+.pendingrepo > p, .approvedrepo > p, .rejectrepo > p {
+  font-family: Inter;
+}
+
+.typeof {
+  display:flex;
+  border-top:2px solid #800000;
+}
+
+.titletype {
+  font-family: Inter;
+  color: #FFFFFF;
+  background: #800000;
+  padding: 0rem 1rem 0rem 1rem;
+}
+
+.lists {
+  padding:2rem 1rem 2rem 1rem;
+}
+
+.lists > p {
+  font-family: Inter;
+  font-size: 16px
+}

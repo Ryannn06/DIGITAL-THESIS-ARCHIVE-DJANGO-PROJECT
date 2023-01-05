@@ -1,0 +1,22 @@
+{% load static %}
+{% load hitcount_tags %}
+
+<div>
+	{% if popular_thesis %}
+		<ul class="list-group list-group-flush">
+			{% for post in popular_thesis %}
+			<li class="list-group-item m-0">
+				<div class="recentpaperitem">
+					<i class="bi bi-archive-fill fs-4"></i>
+					<div>
+						<h5><a href="{% url 'view_studthesis' post.slug %}" class="text-decoration-none text-primary">{{post.title}}</a></h5>	
+						<p class="m-0">with over {% get_hit_count for post %} views as of the moment</p>
+					</div>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	{% else %}	
+		<p class="mt-0">No Papers</p>
+	{% endif %}	
+</div>

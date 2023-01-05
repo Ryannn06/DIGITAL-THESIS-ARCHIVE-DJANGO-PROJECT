@@ -1,0 +1,29 @@
+.asteriskField {
+    display: none;
+}
+
+.profilecontainer {
+	margin: 0 0 0 0;
+	padding: 5rem 5rem 5rem 5rem;
+  font-family: Lato;
+}
+
+.profilerow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_form {
+	font-size: 16px;
+}
+
+.textmaroon {
+  color: #800000;
+}
+
+@media (max-width: 1150px) {
+  .profilecontainer {
+    padding: 2.5rem;
+  }
+}

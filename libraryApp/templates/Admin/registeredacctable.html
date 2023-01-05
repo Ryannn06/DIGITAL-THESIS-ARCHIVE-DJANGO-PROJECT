@@ -1,0 +1,27 @@
+<table id="regacc_table" class="table table-hover table-bordered"  style="width: 100%;">
+    <thead>
+        <th>username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email Address</th>
+        <th>Date Joined</th>
+        <th>Actions</th>
+    </thead>
+    <tbody>
+
+        {% for details in account %}
+
+        <tr>
+            <td>{{details.username}}</td>
+            <td>{{details.first_name}}</td>
+            <td>{{details.last_name}}</td>
+            <td><a href="mailto: {{details.email}}" target="blank_" class="text-primary text-decoration-none">{{details.email}}</a></td>
+            <td>{{details.date_joined}}</td>
+            <td><a href="{% url 'acc_details' details.pk %}" class="text-decoration-none btn btn-danger">More</a></td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>

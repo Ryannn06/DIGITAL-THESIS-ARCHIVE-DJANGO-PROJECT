@@ -1,0 +1,104 @@
+.thesiscontainer {
+  margin: 0 0 0 0;
+  padding: 5rem 5rem 5rem 5rem;
+}
+
+.left_side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.search {
+  margin: 0 0 1rem 0;
+}
+
+.search > a{
+  font-family: Inter;
+  text-decoration: none;
+}
+
+
+.searchbar {
+  display: flex;
+}
+
+.searchbar > input {
+  border-radius:0px;
+  font-family: Inter;
+}
+
+.searchbar > button {
+  border-radius:0px;
+  font-family: Inter;
+  background: #800000;
+  color: #FFFFFF;
+}
+
+.searchbar > button:hover {
+  border-radius:0px;
+  background: #800000;
+  color: #FFFFFF;
+}
+
+.filter_title {
+  display: flex;
+  font-family: Inter;
+}
+
+.filter_title > p > a {
+  color: #800000;
+}
+
+.filter_key {
+  font-weight: bold;
+  color: #800000;
+  text-transform: uppercase;
+}
+
+.cardsdisplay {
+  display:flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background: #F9F9FB;
+  padding: 1rem;
+  border-bottom: 2px solid #800000;
+}
+
+.title {
+  font-family: Inter;
+}
+
+.title > a {
+  text-decoration: none;
+}
+
+.content, .tags > a {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.tags > a {
+  color: #800000;
+}
+
+.paginating {
+  font-family: Inter;
+  margin-top: 2.5rem;
+}
+
+.btn-active {
+  background: #800000;
+  color: #FFFFFF;
+  border-radius: 0;
+}
+
+.btn-pending, .btn-next, .btn-prev {
+  border:1px solid #800000;
+  border-radius: 0;
+}

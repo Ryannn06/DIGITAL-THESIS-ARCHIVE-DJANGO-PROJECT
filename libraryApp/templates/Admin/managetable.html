@@ -1,0 +1,42 @@
+{% load hitcount_tags %}
+
+<table id="approve_table" class="table table-hover table-bordered"  style="width: 100%;">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Course</th>
+      <th scope="col">Published Date</th>
+      <th scope="col">Uploaded by</th>
+      <th scope="col">Date Uploaded</th>
+      <th scope="col">No. of Views</th>
+      <th scope="col">Actions</th>
+    </tr>           
+  </thead>
+
+  <tbody>
+
+    {% for post in thesis_details %}
+    <tr>
+      <td>{{post.title}}</td>
+      <td>
+        {% for author in post.thesis.all %}
+           {{author.last_name}}, {{author.first_name}}<br>
+        {% endfor %}
+      </td>
+      <td>{{post.course}}</td>
+      <td>{{post.published_date}}</td>
+      <td>{{post.uploaded_by.first_name}} {{post.uploaded_by.last_name}}</td>
+      <td>{{post.date_created}}</td>
+      <td>{% get_hit_count for post %}</td>
+
+      <td class="d-flex">
+          <a href="{% url 'edit_thesis' post.slug %}" class="text-decoration-none me-1 btn btn-primary">Edit</a>
+          <a href="{% url 'view_thesis' post.slug %}" class="text-decoration-none btn btn-danger">More</a>
+      </td>
+
+    </tr>
+    {% endfor %}        
+
+  </tbody>
+</table>

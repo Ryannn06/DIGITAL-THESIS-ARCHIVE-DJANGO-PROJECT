@@ -1,0 +1,25 @@
+{% load static %}
+{% load hitcount_tags %}
+
+<div>
+	{% if thesis_details_latest%}
+	<ul class="list-group list-group-flush">
+		{% for post in thesis_details_latest %}
+		<li class="list-group-item m-0">
+			<div class="recentpaperitem">
+				<i class="bi bi-archive-fill pe-2 fs-4"></i>
+				<div>
+					<h5><a href="{% url 'view_studthesis' post.slug %}" class="text-decoration-none text-primary">{{post.title}}</a></h5>	
+					By
+					{% for author in post.thesis.all %}
+					<span class="me-1">{{author.first_name}} {{author.last_name}}</span>
+					{% endfor %}
+				</div>
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<p class="mt-0">No Latest Papers</p>
+	{% endif %}	
+</div>

@@ -1,0 +1,90 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/Admin/Deptform.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid coursecontainer">
+    <div class="row coursecontent">
+      <div class="col-lg-12">
+          <div class="card cardheader p-3">
+            <div class="row welcomebanner">
+              <div class="col-lg-9 welcometext">
+                  <h4>Course Management</h4>
+                  <p>This is the management for courses in the system
+                  </p>
+              </div>
+              <div class="col-lg-3">
+                <img class="img-fluid" src="{% static 'Images/Dashboard.svg' %}" alt='dashboard'>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-lg-12 mt-5">
+          <h4 class="textmaroon">Course Registrations</h4>
+          <p>Try to register a course here under a particular registered department.</p>
+          <hr></hr>
+          <form method="post" class="courseform" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-12">
+                  {{form| crispy}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <button type="submit" class="btn float-end btn-danger mt-3">Register</button>
+                  <button type="reset" class="btn float-end btn-secondary m-1 mt-3">Reset</button>
+                </div>
+              </div>
+          </form>
+      </div>
+        
+      <div class="col-lg-12 mt-5">
+          <h4 class="textmaroon">Registered Courses</h4>
+          <p>Here shows the registered courses in the system.</p>
+          <hr></hr>
+          <table id="book_table" class="table table-hover table-bordered"  style="width: 100%;">
+            <thead>
+              <tr>
+                <th class="author" scope="col">Department</th>
+                <th class="author" scope="col">Course Name</th>
+                <th class="author" scope="col">Action</th>
+              </tr>           
+            </thead>
+
+            <tbody>
+
+              {% for co in course %}
+              <tr>
+                  <td>{{co.coldep_id}}</td>
+                  <td>{{co.course_name}}</td>
+                  <td>
+                    <a href="{% url 'edit_course' co.slug %}" class="text-decoration-none text-decoration-none btn btn-primary">Edit</a>
+                </td>
+
+              </tr>
+              {% endfor %}        
+
+            </tbody>
+          </table>
+      </div>
+
+    </div>
+</div>
+
+{% block scripts %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#book_table').dataTable();
+} );
+
+</script>
+
+{% endblock scripts %}
+
+{% endblock %}

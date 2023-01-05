@@ -1,0 +1,37 @@
+<table id="reject_table" class="textcon table table-hover table-bordered"  style="width: 100%;">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Course</th>
+      <th scope="col">Published Date</th>
+      <th scope="col">Uploaded by</th>
+      <th scope="col">Date Uploaded</th>
+      <th scope="col">Reason</th>
+      <th scope="col">Action</th>
+    </tr>           
+  </thead>
+
+  <tbody>
+
+    {% for post in rejected %}
+    <tr>
+      <td>{{post.title}}</td>
+      <td>
+        {% for author in post.thesis.all %}
+           {{author.last_name}}, {{author.first_name}}<br>
+        {% endfor %}
+      </td>
+      <td>{{post.course}}</td>
+      <td>{{post.published_date}}</td>
+      <td>{{post.uploaded_by}}</td>
+      <td>{{post.date_created}}</td>
+      <td>{{post.reason}}</td>
+      <td>
+        <a href="{% url 'view_thesisreject' post.slug %}" class="text-decoration-none btn btn-danger">More</a>
+      </td>
+    </tr>
+    {% endfor %}        
+
+  </tbody>
+</table>

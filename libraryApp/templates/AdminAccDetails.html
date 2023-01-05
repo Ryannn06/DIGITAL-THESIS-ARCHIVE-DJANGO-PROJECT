@@ -1,0 +1,115 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load hitcount_tags %}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/Admin/Evaluate.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid evaluatecontainer">
+  <div class="evalbodycontainer">
+      <div class="card cardheader p-3">
+        <div class="row welcomebanner">
+          <div class="col-lg-9 welcometext">
+              <h4>Account's Information</h4>
+              <p>The personal information of registered user account shows here.
+              </p>
+          </div>
+          <div class="col-lg-3">
+            <img class="img-fluid" src="{% static 'Images/Dashboard.svg' %}" alt='dashboard'>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 row">
+      <div class="col-lg-12">
+        <div class="mb-3">
+          <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-danger">
+            <i class="bi bi-arrow-left-circle pe-1"></i>Back to previous page
+          </a>
+        </div>
+        <div class="card p-4">
+          <div class="content">
+            <h4 class="textmaroon mb-2">Account's Information</h4>
+            <p class="m-0"><i class="bi bi-person-circle pe-1"></i>Name: 
+              {{reg_acc.first_name}} {{reg_acc.last_name}}
+            </p>
+            <p class="m-0"><i class="bi bi-envelope pe-1"></i>Email: 
+              <a href="mailto:{{detail.reg_acc.email}}">{{reg_acc.email}}</a>
+            </p>
+            <p class="m-0"><i class="bi bi-calendar pe-1"></i>Date Joined: 
+              {{reg_acc.date_joined}}
+            </p>
+            <p class="m-0"><i class="bi bi-envelope pe-1"></i>Email Verification Status: 
+              {% if reg_acc.is_active == True %}
+                <span class="fw-normal badge bg-success fs-6 border border-light">
+                    Verified 
+                    <i class="bi bi-check pe-1"></i>
+                </span>
+              {% else %}
+                <span class="fw-normal badge bg-danger fs-6 border border-light">
+                    Unverified 
+                    <i class="bi bi-check pe-1"></i>
+                </span>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-lg-12">
+          <h4 class="textmaroon">Projects</h4>
+          <p>Shows the account's submitted projects in the system with corresponding status</p>
+          <hr></hr>
+
+          <ul class="list-group list-group-flush">
+            {% if projects %}
+              {% for project in projects %}
+              <li class="list-group-item">
+
+                {% if project.published_status == 'Approved' %}
+                <h5 class="textmaroon position-relative">
+                  {{project.title}}
+                  <span class="fw-normal badge bg-success position-absolute top-0 start-100 translate-middle">
+                    {{project.published_status}}
+                  </span>
+                </h5>
+                <a href="{% url 'view_thesis' project.slug %}" target="_blank" class="text-decoration-none">
+                  View more &raquo;
+                </a>
+
+                {% elif project.published_status == 'Pending' %}
+                <h5 class="textmaroon position-relative">
+                  {{project.title}}
+                  <span class="fw-normal badge bg-primary position-absolute top-0 start-100 translate-middle">
+                    {{project.published_status}}
+                  </span>
+                </h5>
+                <a href="{% url 'evaluate' project.slug %}" target="_blank" class="text-decoration-none"> 
+                  View more &raquo;
+                </a>
+
+                {% elif project.published_status == 'Rejected' %}
+                <h5 class="textmaroon position-relative">
+                  {{project.title}}
+                  <span class="fw-normal badge bg-danger position-absolute top-0 start-100 translate-middle">
+                    {{project.published_status}}
+                  </span>
+                </h5>
+                <a href="{% url 'view_thesisreject' project.slug %}" target="_blank" class="text-decoration-none">View more &raquo;</a>
+                {% endif %}
+              </li>
+              {% endfor %}
+            {% else %}
+              <li class="list-group-item">No projects found</li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

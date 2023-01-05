@@ -1,0 +1,30 @@
+.asteriskField {
+    display: none;
+}
+
+.container-fluid {
+	margin: 0 0 0 0;
+	padding: 5rem 5rem 5rem 5rem;
+	font-family: Lato;
+}
+
+.textmaroon {
+	color: #800000;
+	text-decoration: none;
+}
+
+.loginrow {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loginform > a {
+	text-decoration: none;
+}
+
+@media (max-width: 1150px) {
+	.container-fluid {
+		padding: 2.5rem;
+	}
+}

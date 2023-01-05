@@ -1,0 +1,162 @@
+{% extends 'main.html' %}
+{% load hitcount_tags %}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/MainRepository/thesis.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid thesiscontainer">
+
+	{% if search_paper %}
+		<div class="mb-3">
+		    <h6>
+		    	<a href="{% url 'thesis' %}" class="textmaroon text-decoration-none">
+		    		Home
+		    	</a>
+		      <span class="filter_key"><i class="bi bi-chevron-right"></i>Search for '{{search_paper}}'</span>
+		    </h6>
+		</div>
+	{% endif %}
+
+	<div class="row mb-5">
+		<div class="col-lg-12">
+		 	<form class="searchbar">
+		   		<input type="text" class="form-control" placeholder="Search for across the entire repository..." name="search_paper">
+		   		<button class="btn" type="submit">Search</button>
+			</form>
+		</div>
+	</div>
+
+	{% if search_paper %}
+		<h5 class="textmaroon ps-3 pe-3"><i class="bi bi-search pe-1"></i>
+			Showing results for '{{search_paper}}'
+		</h5>
+		<hr></hr>
+		<ul class="list-group list-group-flush">
+			{% if result %}
+		    {% for post in result %}
+        <li class="list-group-item m-0">
+            <div>
+                <h5><a href="{% url 'view_studthesis' post.slug %}" class="text-decoration-none">{{post.title}}
+                </a></h5>
+            </div>
+            <div class="content">
+                <p class="m-0"><i class="bi bi-person pe-1"></i>By
+                    {% for author in post.thesis.all %}
+                    <span class="me-1">{{author.first_name}} {{author.middle_initial}} {{author.last_name}}</span>
+                    {% endfor %}
+                </p>
+                <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Adviser
+                    {{post.adviser}}
+                </p>
+                <p class="m-0"><i class="bi bi-calendar pe-1"></i>Published in {{post.published_date}}</p>
+                <p class="m-0"><i class="bi bi-eye pe-1"></i>{% get_hit_count for post %} views</p>
+                <div class="tags m-0">
+                    <i class="bi bi-tags pe-1"></i>
+                    {% for tag in post.tags.all %}
+                        <a href="{% url 'tagged' tag.slug %}">{{tag}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="cardthesis">
+                <p class="mb-0">{{post.abstract | safe | truncatewords:100}}</p>
+            </div>
+        </li>
+		    {% endfor %}
+		  {% else %}
+		  	<li class="list-group-item">No Papers Found</li>
+		  {% endif %}
+		</ul>
+	</div>
+	{% else %}
+
+	<div class="row mb-5">
+		<h4 class="textmaroon">Collection by Disciplines</h4>
+		<p>Thesis paper collection submitted by the students of different major courses</p>
+		<hr></hr>
+		{% if department %}
+			{% for post in department %}
+			  <a href="{% url 'course_sort' post.slug %}" class="text-decoration-none">
+			    <h5 class="">{{post.course_name}} ({{post.no_of_thesis}})</h5>
+			  </a>
+			  <p>Thesis papers under the {{post.course_name}}</p>
+			{% endfor %}
+		{% else %}
+			<p>No collections to show</p>
+		{%endif%}
+	</div>
+
+	<div class="row mb-5">
+		<div class="col-lg-12">
+				<h4 class="textmaroon">Recent Submissions</h4>
+				<p>Recently submitted thesis projects in the system</p>
+				<hr></hr>
+				{% include 'MainRepository/recentpaper.html' %}
+		</div>
+	</div>
+
+	<div class="row mb-5">
+		<div class="col-lg-12">
+			<h4 class="textmaroon">Most Popular</h4>
+			<p>Most viewed thesis projects</p>
+			<hr></hr>
+			{% include 'MainRepository/mostviewedpaper.html' %}
+		</div>
+	</div>
+
+	<div class="row mb-5">
+		<h4 class="textmaroon">Keywords</h4>
+		<p>Collection of theses' keywords</p>
+		<div class="col-lg-12 mb-3">
+		 	<form class="searchbar">
+		 		<input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="&#x1F50E; Search for keywords...">
+			</form>
+		</div>
+		<ul class="col keywords list-unstyled" id="keyword-list">
+			{% if tags %}
+				{% for post in tags %}
+				  <li> 
+				  	<a href="{% url 'tagged' post.slug %}" class="text-decoration-none">
+				    	{{post.name}} ({{post.no_of_thesis}})
+					</a>
+				  </li>
+				{% endfor %}
+			{% else %}
+				<li>No collections to show</li>
+			{%endif%}
+		</ul>
+
+	</div>
+</div>
+{% endif %}
+
+{% include 'Footer.html' %}
+
+{% block script %}
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("keyword-list");
+  li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+	  
+</script>
+{% endblock script%}
+
+{% endblock %}

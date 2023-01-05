@@ -1,0 +1,80 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/main.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid homecontainer">
+	<div class="row topsection">
+		<div class="col-lg-5">
+			<h1 class="text-uppercase headtitle">TUPC Digital Thesis Archive</h1>
+			<h5>A digital archival management system of Technological University
+			of the Philippines- Cavite</h5>
+		</div>
+		<div class="col-lg-5">
+			<img src="{% static 'Images/Reading.svg' %}" class="img-fluid">
+		</div>
+	</div>
+
+	<div class="cardsection">
+		<div class="card p-3">
+			<div class="row cardrow">
+				<div class="col-lg-4 leftcol">
+					<i class="bi bi-person fs-1 textmaroon"></i>
+				</div>
+				<div class="col-lg-8 rightcol">
+					<h5 class="textmaroon">Register</h5>
+					<p>Signup with your gsfe tup cavite email address</p>
+				</div>
+			</div>
+		</div>
+		<div class="card p-3">
+			<div class="row cardrow">
+				<div class="col-lg-4 leftcol">
+					<i class="bi bi-search fs-1 textmaroon"></i>
+				</div>
+				<div class="col-lg-8 rightcol">
+					<h5 class="textmaroon">Browse</h5>
+					<p>Explore thesis projects submitted in the system</p>
+				</div>
+			</div>
+		</div>
+		<div class="card p-3">
+			<div class="row cardrow">
+				<div class="col-lg-4 leftcol">
+					<i class="bi bi-archive fs-1 textmaroon"></i>
+				</div>
+				<div class="col-lg-8 rightcol">
+					<h5 class="textmaroon">Deposit</h5>
+					<p>Submit your own thesis project to share for the community</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row middlenextsection">
+		<div class="col-lg-5">
+			<h3 class="textmaroon">Browse for Learning</h3>
+			<p>With over {{thesis_no}} available digital theses to explore from for your own personal research</p>
+			<a class="btn btn-danger" href="{% url 'login' %}">Login now &raquo;</a>
+		</div>
+		<div class="col-lg-6">
+			<img src="{% static 'Images/BookReading.svg' %}" class="img-fluid">
+		</div>
+	</div>
+	<div class="row beforefootersection">
+		<div class="col-lg-4 text-center">
+			<hr></hr>
+			<h3 class="textmaroon">Don't have an account?</h3>
+			<p>
+				<a href="{% url 'register' %}" class="text-decoration-none">Register</a> 
+				using your tup cavite gsfe account</p>
+			<hr></hr>
+		</div>
+	</div>
+</div>
+
+{% include 'Footer.html' %}
+
+{% endblock %}

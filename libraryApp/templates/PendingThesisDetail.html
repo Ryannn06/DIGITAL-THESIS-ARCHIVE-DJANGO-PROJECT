@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/Admin/Evaluate.css' %}?{% now "U" %}"">
+
+{% include 'Navibar.html' %}
+
+<div class="container-fluid evaluatecontainer">
+	<div class="card p-5 evalbodycontainer">
+		<h2>Project Evaluation</h2>
+		<p>Evaluate submitted thesis project here.</p>
+		
+		<h4>Thesis Information</h4>
+		<div class="thesisinfo">
+		<p class="m-0"><i class="bi bi-book pe-1"></i>Title: {{detail.title}}</p>
+		<p class="m-0"><i class="bi bi-person pe-1"></i>Author: {{detail.author}}</p>
+		<p class="m-0"><i class="bi bi-building pe-1"></i>Course: {{detail.course}}</p>
+		<p class="m-0"><i class="bi bi-calendar pe-1"></i>Published Date: {{detail.published_date}}</p>
+		<p class="m-0"><i class="bi bi-image pe-1"></i>Image:
+			{% if image_banner %}
+				<a href="{{detail.image_banner.url}}" target="_blank">View Image</a>
+			{% else %}
+				<i class="text-muted">No available Image</i>
+			{% endif %}
+		</p>
+		<p class="m-0"><i class="bi bi-file-pdf pe-1"></i>PDF File: 
+			<a href="{{detail.pdf.url}}" target="_blank">View PDF</a>
+		</p>
+		<p class="m-0 mt-3"><i class="bi bi-file-person pe-1"></i>Submitted By: {{detail.uploaded_by}}</p>
+		<p class="m-0"><i class="bi bi-calendar pe-1"></i>Submitted Date: {{detail.date_created}}</p>
+		</div>
+
+		<h4 class="mt-5">Abstract</h4>
+		<div class="abstractinfo">
+			<div class="abstract card">
+				{{detail.abstract}}
+			</div>
+		</div>
+
+		<h4 class="mt-5">Evaluate</h4>
+		<div class="evalform">
+			<form method="POST" class="form-group mb-5">
+				{% csrf_token %}
+				{{form|crispy}}
+				<button type="submit" class="btn btn-danger mt-3 mb-3 float-end">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% include 'Footer.html' %}
+{% endblock %}

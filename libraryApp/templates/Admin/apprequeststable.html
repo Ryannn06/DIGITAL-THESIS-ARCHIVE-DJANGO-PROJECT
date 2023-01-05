@@ -1,0 +1,25 @@
+<table id="book_table2" class="table table-hover table-bordered"  style="width: 100%;">
+  <thead>
+    <tr>
+      <th scope="col">Requestor</th>
+      <th scope="col">Email</th>
+      <th scope="col">Thesis</th>
+      <th scope="col">Date Approved</th>
+      <th scope="col">Reason for access</th>
+    </tr>           
+  </thead>
+
+  <tbody>
+
+    {% for detail in approved %}
+    <tr>
+      <td>{{detail.user}}</td>
+      <td>{{detail.user.email}}</td>
+      <td>{{detail.thesis.title}}</td>
+      <td>{{detail.date_evaluated}}</td>
+      <td>{{detail.reason}}</td>
+    </tr>
+    {% endfor %}        
+
+  </tbody>
+</table>

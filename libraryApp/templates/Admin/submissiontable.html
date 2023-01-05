@@ -1,0 +1,33 @@
+<table id="pending_table" class="textcon table table-hover table-bordered"  style="width: 100%;">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Course</th>
+      <th scope="col">Published Date</th>
+      <th scope="col">Uploaded by</th>
+      <th scope="col">Date Uploaded</th>
+      <th class="no-sort" scope="col">Actions</th>
+    </tr>           
+  </thead>
+
+  <tbody>
+
+    {% for post in details %}
+    <tr>
+      <td>{{post.title}}</td>
+      <td>
+        {% for author in post.thesis.all %}
+           {{author.last_name}}, {{author.first_name}}<br>
+        {% endfor %}
+      </td>
+      <td>{{post.course}}</td>
+      <td>{{post.published_date}}</td>
+      <td>{{post.uploaded_by.first_name}} {{post.uploaded_by.last_name}}</td>
+      <td>{{post.date_created}}</td>
+      <td><a href="{% url 'evaluate' post.slug %}" class="text-decoration-none btn btn-primary">Evaluate</a></td>
+    </tr>
+    {% endfor %}        
+
+  </tbody>
+</table>

@@ -1,0 +1,23 @@
+.requestcontainer {
+  margin: 0 0 0 0;
+  padding: 5rem 5rem 5rem 5rem;
+}
+
+.requestcontent {
+  text-align: justify;
+  min-height: 50vh;
+}
+
+.requestcontent > h4, .requestcontent > h2 {
+  font-family: Inter;
+}
+
+.requestcontent > p, .requestform {
+  font-family: Inter;
+  font-size: 16px;
+}
+
+.thesistitle {
+  color: #800000;
+  font-weight: bold;
+}

@@ -1,0 +1,91 @@
+.homecontainer {
+	font-family: Lato;
+}
+
+.textmaroon {
+	color: #800000;
+}
+
+.topsection {
+	padding: 2.5rem 5rem 7.5rem 5rem;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	background: linear-gradient(90deg, hsla(265, 53%, 29%, 1) 0%, hsla(24, 93%, 73%, 1) 100%);
+	color: #FFFFFF;
+}
+
+.cardsection {
+	margin-top: -5rem;
+	padding: 0rem 5rem 2.5rem 5rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.cardsection > .card {
+	width: 32%;
+	height: 25vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #F1F1F1;
+}
+
+.cardrow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.leftcol {
+	display: flex;
+	justify-content: center;
+}
+
+.rightcol {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-left: 1px solid #800000;
+}
+
+.middlenextsection {
+	padding: 2.5rem 5rem 2.5rem 5rem;
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.beforefootersection {
+	padding: 2.5rem 5rem 2.5rem 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media screen and (max-width: 1150px) {
+	.topsection {
+		padding: 2.5rem 2.5rem 7.5rem 2.5rem;
+	}
+
+	.cardsection {
+		padding:  0rem 2.5rem 2.5rem 2.5rem;
+	}
+
+	.middlenextsection, .beforefootersection {
+		padding: 0rem 2.5rem 2.5rem 2.5rem;
+	}
+
+	.cardsection > .card {
+		width: 100%;
+		height: auto;
+	}
+
+	.rightcol {
+		border-left: none;
+	}
+}
