@@ -16,10 +16,10 @@
                     <span class="me-1">{{author.first_name}} {{author.last_name}}</span>
                     {% endfor %}
                 </p>
-                <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Adviser
+                <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Thesis Advisor
                     {{post.adviser}}
                 </p>
-                <p class="m-0"><i class="bi bi-calendar pe-1"></i>{{post.published_date}}</p>
+                <p class="m-0"><i class="bi bi-calendar pe-1"></i>{{post.get_published_month_display}} {{post.published_year}}</p>
                 <p class="m-0"><i class="bi bi-eye pe-1"></i>{% get_hit_count for post %} views</p>
                 <div class="tags m-0">
                     <i class="bi bi-tags pe-1"></i>Keywords:

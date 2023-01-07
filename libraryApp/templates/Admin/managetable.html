@@ -25,7 +25,7 @@
         {% endfor %}
       </td>
       <td>{{post.course}}</td>
-      <td>{{post.published_date}}</td>
+      <td>{{post.get_published_month_display}} {{post.published_year}}</td>
       <td>{{post.uploaded_by.first_name}} {{post.uploaded_by.last_name}}</td>
       <td>{{post.date_created}}</td>
       <td>{% get_hit_count for post %}</td>

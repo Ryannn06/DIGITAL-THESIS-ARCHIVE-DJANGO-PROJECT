@@ -17,10 +17,11 @@ def generate_citations(sender, instance, created, *args, **kwargs):
 	authors = Authors.objects.filter(thesis__thesis__thesis_id=thesis.thesis_id).distinct()
 	
 	#extract year from datefield column of the thesis
-	year = str(thesis.published_date.year)
+	year = str(thesis.published_year)
 
-	month_number = int(thesis.published_date.month)
-	month_name = str(calendar.month_name[month_number])
+	#month_number = int(thesis.published_date.month)
+	#month_name = str(calendar.month_name[month_number])
+	month_name = str(thesis.get_published_month_display())
 
 	#format authors according to diff. cititaions
 	apa_formatted_author = apa_format_author(authors)

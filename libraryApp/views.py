@@ -61,21 +61,16 @@ def page_not_found(request, exception):
 
 def index(request):
     if request.user.is_authenticated:
-        if request.user.is_staff:
+        if request.user.is_admin:
             return redirect('admin/dashboard')
 
-        else:
+        elif request.user.is_student:
             return redirect('/repository')
 
-    datas = thesisDB.objects.filter(published_status='Approved').order_by('date_created')[:5]
-    thesis_no = thesisDB.objects.filter(published_status='Approved').count()
+        else:
+            raise PermissionDenied()
 
-    context = {
-        'thesis_details':datas,
-        'thesis_no':thesis_no,
-    }
-
-    return render(request, 'Home.html', context)
+    return render(request, 'Home.html')
 
 
 def auth_login(request):
@@ -91,9 +86,12 @@ def auth_login(request):
             user = authenticate(username=username,password=password)
 
             if user:
-                if user.is_superuser:
+                if user.is_admin:
                     login(request,user)
                     return redirect('/admin/dashboard')
+
+                elif user.is_superuser:
+                    return redirect('/admin')
 
                 else:
                     login(request,user)
@@ -465,7 +463,7 @@ def acc_details(request, user_id):
 @login_required
 @for_students
 def thesis(request):
-    datas = thesisDB.objects.filter(published_status='Approved').order_by('-published_date').prefetch_related('thesis')
+    datas = thesisDB.objects.filter(published_status='Approved').order_by('-published_year', 'published_month').prefetch_related('thesis')
 
     course_thesiscount = ColCourse.objects.annotate(no_of_thesis = Count('thesisdb', filter=Q(thesisdb__published_status='Approved'))).order_by('course_name')
     popular_thesis = thesisDB.objects.filter(published_status='Approved').order_by('-hit_count_generic__hits')[:5]
@@ -474,7 +472,7 @@ def thesis(request):
     search_bar = request.GET.get('search_paper')
 
     if search_bar != '' and search_bar is not None:
-        datas = datas.filter(Q(title__icontains=search_bar)|  Q(thesis__first_name__icontains=search_bar) |  Q(thesis__last_name__icontains=search_bar) | Q(adviser__icontains=search_bar)  |  Q(abstract__icontains=search_bar) |  Q(published_date__icontains=search_bar)).distinct()
+        datas = datas.filter(Q(title__icontains=search_bar)|  Q(thesis__first_name__icontains=search_bar) |  Q(thesis__last_name__icontains=search_bar) | Q(adviser__icontains=search_bar)  |  Q(abstract__icontains=search_bar) |  Q(published_year__icontains=search_bar)).distinct()
 
     tags = Tag.objects.annotate(no_of_thesis = Count('thesisdb', filter=Q(thesisdb__published_status='Approved')))
 
@@ -493,12 +491,12 @@ def thesis(request):
 @for_students
 def tagged(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
-    post = thesisDB.objects.filter(tags=tag, published_status='Approved').order_by('-published_date').prefetch_related('thesis')
+    post = thesisDB.objects.filter(tags=tag, published_status='Approved').order_by('-published_year', 'published_month').prefetch_related('thesis')
 
     search_bar = request.GET.get('search_paper')
 
     if search_bar != '' and search_bar is not None:
-        post = post.filter(Q(title__icontains=search_bar)|  Q(thesis__first_name__icontains=search_bar) |  Q(thesis__last_name__icontains=search_bar) | Q(adviser__icontains=search_bar)  |  Q(abstract__icontains=search_bar) |  Q(published_date__icontains=search_bar)).distinct()
+        post = post.filter(Q(title__icontains=search_bar)|  Q(thesis__first_name__icontains=search_bar) |  Q(thesis__last_name__icontains=search_bar) | Q(adviser__icontains=search_bar)  |  Q(abstract__icontains=search_bar) |  Q(published_year__icontains=search_bar)).distinct()
 
     page = request.GET.get('page', 1)
 
@@ -521,14 +519,14 @@ def tagged(request, slug):
 @login_required
 @for_students
 def course_sort(request, slug):
-    datas = thesisDB.objects.filter(course_id__slug = slug, published_status='Approved').order_by('-published_date').prefetch_related('thesis')
+    datas = thesisDB.objects.filter(course_id__slug = slug, published_status='Approved').order_by('-published_year', 'published_month').prefetch_related('thesis')
 
     course_what = get_object_or_404(ColCourse, slug=slug)
 
     search_bar = request.GET.get('search_paper')
 
     if search_bar != '' and search_bar is not None:
-        datas = datas.filter(Q(title__icontains=search_bar)|  Q(thesis__first_name__icontains=search_bar) |  Q(thesis__last_name__icontains=search_bar) | Q(adviser__icontains=search_bar)  |  Q(abstract__icontains=search_bar) |  Q(published_date__icontains=search_bar)).distinct()
+        datas = datas.filter(Q(title__icontains=search_bar)|  Q(thesis__first_name__icontains=search_bar) |  Q(thesis__last_name__icontains=search_bar) | Q(adviser__icontains=search_bar)  |  Q(abstract__icontains=search_bar) |  Q(published_year__icontains=search_bar)).distinct()
 
     page = request.GET.get('page', 1)
 
@@ -599,7 +597,7 @@ def profile(request):
 @login_required
 @for_students
 def personal_repo(request):
-    thesis = thesisDB.objects.filter(uploaded_by=request.user).prefetch_related('thesis')
+    thesis = thesisDB.objects.filter(uploaded_by=request.user).prefetch_related('thesis').order_by('-date_created')
 
     context = {
         'thesis':thesis,
@@ -664,7 +662,6 @@ def viewPDF(request, slug):
 @login_required
 def protected_serve(request, path, document_root=None, show_indexes=False):
 
-    messages.success(request, "You have reach this section" )
     user = request.user
 
     if user.is_staff and user.is_admin:
@@ -711,9 +708,13 @@ class ThesisInline():
 
         if form.instance.published_status == 'Rejected':
             form.instance.published_status = 'Pending'
+            form.instance.date_created = datetime.now()
+            form.instance.previous_reason = form.instance.reason
+            form.instance.reason = None
 
         title = form.instance.title
         form.instance.uploaded_by = self.request.user
+
         self.object = form.save()
 
         # for every formset, attempt to find a specific formset save function
@@ -864,3 +865,16 @@ class AdminThesisUpdate(AdminThesisInline, UpdateView):
         return {
             'variants': AuthorFormSet(self.request.POST or None, self.request.FILES or None, instance=self.object, prefix='variants'),
         }
+
+@login_required
+@for_students
+def personal_access(request):
+    thesis = thesisDB.objects.filter(uploaded_by=request.user).prefetch_related('thesis')
+    pdf_access = RequestPDF.objects.filter(request_status='Approved', user=request.user).prefetch_related('thesis')
+
+    context = {
+        'thesis': thesis,
+        'pdf_access': pdf_access,
+    }
+
+    return render(request, 'MyAccess.html', context)

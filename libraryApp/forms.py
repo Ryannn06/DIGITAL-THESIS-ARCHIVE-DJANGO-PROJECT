@@ -3,27 +3,9 @@ from .models import *
 from ckeditor.widgets import CKEditorWidget
 from django.core.exceptions import ValidationError
 from django.forms import inlineformset_factory
+
 import re
-#from allauth.account.forms import SignupForm
-#from django.contrib.auth.forms import UserCreationForm
-#from django.contrib.auth.forms import AuthenticationForm
-#from django.contrib.auth.models import User
 
-
-#class CustomSignupForm(UserCreationForm):
-#    last_name = forms.CharField(max_length=30, label='Last Name', widget=forms.TextInput(attrs={'placeholder': 'Last Name','required':'required'}))
-#    email = forms.EmailField(max_length=40, label='Email Address', widget=forms.TextInput(attrs={'placeholder':'Email Address','required':'required'}))
-
-#    class Meta:
-#        model = Registrations
-#        fields = ['username','first_name', 'last_name','email']
-
-#    def save(self, request):
-#        user = super(CustomSignupForm, self).save(request)
-#        user.first_name = self.cleaned_data['first_name']
-#        user.last_name = self.cleaned_data['last_name']
-#        user.save()
-#        return user
 class AuthorForm(forms.ModelForm):
     class Meta: 
         model = Authors
@@ -44,7 +26,7 @@ class thesisForm(forms.ModelForm):
 
     class Meta:
         model = thesisDB
-        fields = ('title', 'adviser', 'published_date', 'course','tags','abstract','pdf', 'submission_agreement',)
+        fields = ('title', 'adviser','published_year','published_month', 'course','tags','abstract','pdf', 'submission_agreement',)
         readonly_fields = ['date_created']
         course = forms.ModelChoiceField(queryset=ColCourse.objects.all().order_by('-course_name'))
 #        abstract = forms.CharField(widget=CKEditorWidget())
@@ -52,10 +34,6 @@ class thesisForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs=
                 {'placeholder': 'Title', 'class':'form-control', 'required': 'required'}),
-            'published_date': forms.DateInput(attrs=
-                {'class':'form-control', 'required': 'required', 'type':'date'}),
-            'author': forms.TextInput(attrs=
-                {'placeholder': 'Author', 'class':'form-control', 'required': 'required', 'data-role': 'tagsinput'}),
             'abstract': forms.Textarea(attrs=
                 {'placeholder': 'Abstract', 'class':'form-control',}),
             'adviser': forms.TextInput(attrs=
@@ -89,7 +67,7 @@ class AdminthesisForm(forms.ModelForm):
 
     class Meta:
         model = thesisDB
-        fields = ('title', 'adviser', 'published_date', 'course','tags','abstract','pdf',)
+        fields = ('title', 'adviser','published_year','published_month', 'course','tags','abstract','pdf',)
         readonly_fields = ['date_created']
         course = forms.ModelChoiceField(queryset=ColCourse.objects.all().order_by('-course_name'))
 #        abstract = forms.CharField(widget=CKEditorWidget())
@@ -97,10 +75,6 @@ class AdminthesisForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs=
                 {'placeholder': 'Title', 'class':'form-control', 'required': 'required'}),
-            'published_date': forms.DateInput(attrs=
-                {'class':'form-control', 'required': 'required', 'type':'date'}),
-            'author': forms.TextInput(attrs=
-                {'placeholder': 'Author', 'class':'form-control', 'required': 'required', 'data-role': 'tagsinput'}),
             'abstract': forms.Textarea(attrs=
                 {'placeholder': 'Abstract', 'class':'form-control',}),
             'adviser': forms.TextInput(attrs=

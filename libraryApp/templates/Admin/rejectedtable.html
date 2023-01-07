@@ -23,7 +23,7 @@
         {% endfor %}
       </td>
       <td>{{post.course}}</td>
-      <td>{{post.published_date}}</td>
+      <td>{{post.get_published_month_display}} {{post.published_year}}</td>
       <td>{{post.uploaded_by}}</td>
       <td>{{post.date_created}}</td>
       <td>{{post.reason}}</td>

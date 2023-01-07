@@ -31,11 +31,11 @@
                     <span class="me-1">{{author.first_name}} {{author.middle_initial}} {{author.last_name}}</span>
                     {% endfor %}
                 </p>
-                <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Adviser:
+                <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Thesis Advisor:
                     {{detail.adviser}}
                 </p>
 				<p class="m-0"><i class="bi bi-building pe-1"></i>Course: {{detail.course}}</p>
-				<p class="m-0"><i class="bi bi-calendar pe-1"></i>Published Date: {{detail.published_date}}</p>
+				<p class="m-0"><i class="bi bi-calendar pe-1"></i>Published Date: {{detail.get_published_month_display}} {{detail.published_year}}</p>
 				<p class="m-0"><i class="bi bi-calendar pe-1"></i>Date Uploaded: {{detail.date_created}}</p>
 				<p class="m-0"><i class="bi bi-person pe-1"></i>Uploader: {{detail.uploaded_by}}</p>
 

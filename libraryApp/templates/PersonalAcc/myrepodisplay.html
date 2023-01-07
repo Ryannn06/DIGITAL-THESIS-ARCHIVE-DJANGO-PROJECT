@@ -27,12 +27,12 @@
                     <span class="me-1">{{author.first_name}} {{author.last_name}}</span>
                     {% endfor %}
                 </p>
-                <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Adviser
+                <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Thesis Advisor
                     {{post.adviser}}
                 </p>
                 
                 <p class="m-0"><i class="bi bi-building pe-1"></i>{{post.course}}</p>
-                <p class="m-0"><i class="bi bi-calendar pe-1"></i>Published in {{post.published_date}}</p>
+                <p class="m-0"><i class="bi bi-calendar pe-1"></i>Published in {{post.get_published_month_display}} {{post.published_year}}</p>
 
                 {% if post.published_status == 'Approved' %}
                 <p class="m-0"><i class="bi bi-eye pe-1"></i>{% get_hit_count for post %} views</p>

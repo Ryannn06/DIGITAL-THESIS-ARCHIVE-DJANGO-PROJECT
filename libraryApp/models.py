@@ -20,6 +20,7 @@ from django.utils.text import slugify
 from .utils import unique_slugify
 
 from django.utils import timezone
+from datetime import date
 
 # Create your models here.
 #py manage.py makemigrations
@@ -40,6 +41,7 @@ class ColDept(Model):
 	def __str__(self):
 		department = str(self.department_name + " (" +self.department_abbreviation + ")")
 		return department
+
 
 class ColCourse(Model):
 	course_name = models.CharField(max_length=200, blank=True, null=True, verbose_name='Course', unique=True)
@@ -64,12 +66,29 @@ THESIS_DECISION = (
 
 
 #my_validator = RegexValidator(r"'^[A-Z]\w+,\s*[A-Z]\.(?:\s+and (?:[A-Z]\w+,\s*[A-Z]\.|et\.\s+al\.))?'gm", "Invalid Format")
+MONTH_CHOICES = (
+	('1', 'January'),
+	('2', 'February'),
+	('3', 'March'),
+	('4', 'April'),
+	('5', 'May'),
+	('6', 'June'),
+	('7', 'July'),
+	('8', 'August'),
+	('9', 'September'),
+	('10', 'October'),
+	('11', 'November'),
+	('12', 'December'),
+	)
+
+YEAR_CHOICES = [(y,y) for y in range(1968, date.today().year+1)]
 
 class thesisDB(Model):
 	thesis_id = models.AutoField(primary_key=True, blank=True, null=False)
 	title = models.CharField(max_length=200, blank=True, null=True, unique=True)
 	adviser = models.CharField(max_length=200, blank=True, null=True)
-	published_date = models.DateField(blank=True, null=True)
+	published_year = models.IntegerField(choices=YEAR_CHOICES, default=date.today().year)
+	published_month = models.CharField(max_length=15, choices=MONTH_CHOICES, default='1')
 	pdf = models.FileField(upload_to='pdf/', blank=True, null=True ,validators=[FileExtensionValidator(['pdf'])],)
 	course = models.ForeignKey(ColCourse, default=None, on_delete=models.CASCADE, verbose_name='Course')
 	tags = TaggableManager()
@@ -79,6 +98,7 @@ class thesisDB(Model):
 	abstract = models.TextField(blank=True, null=True)
 	hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
 	reason = models.TextField(blank=True, null=True)
+	previous_reason = models.TextField(blank=True, null=True)
 	slug = models.SlugField(max_length = 250, null = True, blank = True)
 	apa = models.CharField(max_length=300, null=True, blank=True)
 	mla = models.CharField(max_length=300, null=True, blank=True)
@@ -88,7 +108,7 @@ class thesisDB(Model):
 	def save(self, *args, **kwargs):
 		self.title = self.title.title()
 		#self.author = self.author.title()
-		self.slug = slugify(self.title + str(self.published_date))
+		self.slug = slugify(self.title + str(self.published_year))
 		super().save(*args, **kwargs)
 		
 	class Meta:

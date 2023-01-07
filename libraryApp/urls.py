@@ -55,6 +55,7 @@ urlpatterns = [
     path('viewPDF/<slug:slug>', views.viewPDF, name='viewPDF'),
     path('profile/', views.profile, name='profile'),
     path('personal_repository/', views.personal_repo, name='personal_repo'),
+    path('personal_access/', views.personal_access, name='personal_access'),
 
     re_path(r'^media/(?P<path>.*)$', views.protected_serve, {'document_root': settings.MEDIA_ROOT}),
 
