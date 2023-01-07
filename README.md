@@ -1,2 +1,2 @@
 # THESIS-ARCHIVE-DJANGO-PROJECT
- A thesis digital archive
+A Digital Thesis Archive for Technological University of The Philippines Cavite
