@@ -13,13 +13,13 @@ class AuthorForm(forms.ModelForm):
 
         widgets = {
             'first_name': forms.TextInput(attrs=
-                {'placeholder': 'First Name', 'class':'form-control'}),
+                {'placeholder': 'First Name', 'class':'form-control', 'required':'required'}),
             'last_name': forms.TextInput(attrs=
-                {'placeholder': 'Last Name', 'class':'form-control'}),
+                {'placeholder': 'Last Name', 'class':'form-control', 'required':'required'}),
             }
 
 AuthorFormSet = inlineformset_factory(thesisDB, Authors, form=AuthorForm, 
-        fields=['first_name', 'last_name',], extra=1, can_delete=True, can_delete_extra=True)
+        fields=['first_name', 'last_name',], min_num=1, validate_min=True, extra=0, can_delete=True, can_delete_extra=True)
 
 
 class thesisForm(forms.ModelForm):

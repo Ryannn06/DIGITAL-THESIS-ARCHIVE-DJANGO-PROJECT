@@ -865,16 +865,17 @@ class AdminThesisUpdate(AdminThesisInline, UpdateView):
         return {
             'variants': AuthorFormSet(self.request.POST or None, self.request.FILES or None, instance=self.object, prefix='variants'),
         }
+        
 
 @login_required
 @for_students
 def personal_access(request):
-    thesis = thesisDB.objects.filter(uploaded_by=request.user).prefetch_related('thesis')
-    pdf_access = RequestPDF.objects.filter(request_status='Approved', user=request.user).prefetch_related('thesis')
+    appdf_access = RequestPDF.objects.filter(request_status='Approved', user=request.user).prefetch_related('thesis')
+    pendpdf_access = RequestPDF.objects.filter(request_status='Pending', user=request.user).prefetch_related('thesis')
 
     context = {
-        'thesis': thesis,
-        'pdf_access': pdf_access,
+        'pendpdf_access': pendpdf_access,
+        'appdf_access': appdf_access,
     }
 
     return render(request, 'MyAccess.html', context)

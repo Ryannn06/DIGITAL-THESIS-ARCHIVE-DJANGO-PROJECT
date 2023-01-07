@@ -9,62 +9,40 @@
 <div class="container-fluid repocontainer">
   <div class="row">
     <div class="col-lg-12 right_section">
-      <h4 class="textmaroon">My Access</h4>
-      <p>Thesis projects you have pdf access with</p>
-
-      <div class="approveprojects mb-5 mt-5">
-        <h4 class="textmaroon">Uploaded Projects</h4>
-        <p>Your uploaded projects in the system</p>
+      <div class="approvedpdfaccess mb-5">
+        <h4 class="textmaroon">Approved PDF Requests</h4>
+        <p>Thesis project/s that you have approved request to access with</p>
         <hr></hr>
         <ul class="list-group list-group-flush">
-          {% if thesis %}
-            {% for project in thesis %}
+          {% if appdf_access %}
+            {% for project in appdf_access %}
             <li class="list-group-item">
-                {% if project.published_status == 'Approved' %}
-                  <h5 class="textmaroon position-relative">
-                    {{project.title}}
-                    <span class="fw-normal badge bg-success position-absolute top-0 start-100 translate-middle">
-                      {{project.published_status}}
-                    </span>
-                  </h5>
-                {% elif project.published_status == 'Pending' %}
-                  <h5 class="textmaroon position-relative">
-                    {{project.title}}
-                    <span class="fw-normal badge bg-primary position-absolute top-0 start-100 translate-middle">
-                      {{project.published_status}}
-                    </span>
-                  </h5>
-                {% elif project.published_status == 'Rejected' %}
-                  <h5 class="textmaroon position-relative">
-                    {{project.title}}
-                    <span class="fw-normal badge bg-danger position-absolute top-0 start-100 translate-middle">
-                      {{project.published_status}}
-                    </span>
-                  </h5>
-                {% endif %}
+              <h5 class="textmaroon">
+                {{project.thesis.title}}
+              </h5>
               <p class="m-0">By
-                {% for author in project.thesis.all %}
+                {% for author in project.thesis.thesis.all %}
                 <span class="me-1">{{author.first_name}} {{author.last_name}}</span>
                 {% endfor %}
               </p>
-              <a href="{% url 'personal_repo'%}" class="text-decoration-none">
-                Visit personal repository &raquo;
+              <a href="{% url 'view_studthesis' project.thesis.slug %}" class="text-decoration-none">
+                View thesis &raquo;
               </a> 
             </li>
             {% endfor %}
           {% else %}
-            <p>No uploaded projects yet</p>
+            <p>No approved requests yet</p>
           {% endif %}
         </ul>  
       </div>
 
-      <div class="approvedpdfaccess">
-        <h4 class="textmaroon">Approved PDF Requests</h4>
-        <p>Thesis project/s that you have requested to access with</p>
+      <div class="approvedpdfaccess mb-5">
+        <h4 class="textmaroon">Pending PDF Requests</h4>
+        <p>Thesis project/s that you have pending request to access with</p>
         <hr></hr>
         <ul class="list-group list-group-flush">
-          {% if pdf_access %}
-            {% for project in pdf_access %}
+          {% if pendpdf_access %}
+            {% for project in pendpdf_access %}
             <li class="list-group-item">
               <h5 class="textmaroon">
                 {{project.thesis.title}}
