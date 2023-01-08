@@ -20,6 +20,8 @@ urlpatterns = [
     path('admin/uploadProject', AdminThesisCreate.as_view(), name='add'),
     path('admin/updateProject/<slug:slug>', AdminThesisUpdate.as_view(), name='edit_thesis'),
     path('admin/viewApproved/<slug:slug>', views.view_thesis, name='view_thesis'),
+
+    path('admin/appprovedprojects_csv/', views.approvedprojects_csv, name='approvedcsv'),
     path('admin/viewRejected/<slug:slug>', views.view_thesisreject, name='view_thesisreject'),
 
     path('admin/managePending/', views.manage_pending, name='managePending'),
@@ -32,6 +34,7 @@ urlpatterns = [
     path('admin/manageRequests/', views.manage_request, name='manageRequests'),
     path('admin/evaluateRequests/<request_id>', views.evaluate_request, name='evaluateRequests'),
 
+    path('admin/registeredaccounts_csv/', views.regaccs_csv, name='regaccscsv'),
     path('admin/registeredAccounts/', views.regAccounts, name='regAccounts'),
     path('admin/accountDetails/<user_id>', views.acc_details, name='acc_details'),
 

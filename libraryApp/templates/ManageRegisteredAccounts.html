@@ -26,7 +26,8 @@
         <div class="col-lg-12 mt-5">
             <h4 class="textmaroon">Registered Accounts</h4>
             <p>Showing results for registered accounts</p>
-            <hr></hr> 
+            <hr></hr>
+            <a href="{% url 'regaccscsv' %}" class="btn btn-success float-end">Export to CSV</a> 
             {% include 'Admin/registeredacctable.html' %}  
         </div>
 

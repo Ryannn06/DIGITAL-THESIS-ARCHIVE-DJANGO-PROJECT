@@ -50,10 +50,7 @@ from django import template
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 
-import io
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter, A4
+import csv
 
 
 def page_not_found(request, exception):
@@ -879,3 +876,38 @@ def personal_access(request):
     }
 
     return render(request, 'MyAccess.html', context)
+
+
+@login_required
+@for_admin
+def approvedprojects_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    writer = csv.writer(response)
+
+    writer.writerow(['Title', 'Authors', 'Adviser', 'Course', 'Published Year', 'Published Month', 'Date Uploaded', 'Uploadeder'])
+
+    projects = thesisDB.objects.filter(published_status='Approved').prefetch_related('thesis').values_list('title', 'thesis__last_name',  'adviser', 'course', 'published_year', 'published_month', 'date_created', 'uploaded_by').order_by('title')
+    
+    for project in projects:  
+        writer.writerow(project)
+    
+    response['Content-Disposition'] =  'attachment; filename = "Approved_Thesis_Projects.csv"'
+    return response
+
+
+@login_required
+@for_admin
+def regaccs_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    writer = csv.writer(response)
+
+    writer.writerow(['First Name', 'Last Name', 'Email', 'Email Verified', 'Date Joined'])
+
+    users = get_user_model()
+    accounts = users.objects.filter(is_student=True).values_list('first_name', 'last_name', 'email', 'is_active', 'date_joined').order_by('first_name')
+    
+    for account in accounts:  
+        writer.writerow(account)
+    
+    response['Content-Disposition'] =  'attachment; filename = "Registered_Accounts.csv"'
+    return response

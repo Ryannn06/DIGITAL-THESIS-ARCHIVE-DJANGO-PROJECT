@@ -13,8 +13,7 @@
               <div class="row welcomebanner">
                 <div class="col-lg-9 welcometext">
                     <h4>Approved Projects</h4>
-                    <p>This is the management repository for approved thesis projects in
-                        the system
+                    <p>This is the management repository for approved thesis projects in the system
                     </p>
                 </div>
                 <div class="col-lg-3">
@@ -37,6 +36,7 @@
             <h4 class="textmaroon">Approved Projects</h4>
             <p>Showing results for the approved projects</p>
             <hr></hr>
+            <a href="{% url 'approvedcsv' %}" class="btn btn-success float-end">Export to CSV</a>
             <div>{% include 'Admin/managetable.html' %}</div>
         </div> 
 
