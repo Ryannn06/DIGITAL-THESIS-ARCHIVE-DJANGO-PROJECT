@@ -52,8 +52,6 @@ INSTALLED_APPS = [
     'hitcount',
     'taggit',
     'taggit_autosuggest',
-    'django_static_jquery3',
-    'django_yearmonth_widget',
     'members',
     'register.apps.RegisterConfig',
 ]
@@ -128,13 +126,13 @@ AUTH_USER_MODEL = 'libraryApp.Registrations'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'library',
-        #'NAME': 'technorepository$default',
-        'USER':'root',
-        #'USER':'technorepository',
-        'PASSWORD':'',
-        'HOST':'localhost',
-        #'HOST':'technorepository.mysql.pythonanywhere-services.com',
+        #'NAME': 'library',
+        'NAME': 'technorepository$default',
+        #'USER':'root',
+        'USER':'technorepository',
+        'PASSWORD':'gelo120601',
+        #'HOST':'localhost',
+        'HOST':'technorepository.mysql.pythonanywhere-services.com',
         'PORT': '',
         #'OPTIONS': {
         # "init_command": "SET foreign_key_checks = 0;",
