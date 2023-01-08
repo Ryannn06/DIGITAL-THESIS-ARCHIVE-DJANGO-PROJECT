@@ -279,7 +279,7 @@ def evaluate(request, slug):
 @for_admin
 def regAccounts(request):
     user = get_user_model()
-    account = user.objects.filter(is_superuser=False, is_active=True)
+    account = user.objects.filter(is_superuser=False)
 
     context = {
         'account':account,
