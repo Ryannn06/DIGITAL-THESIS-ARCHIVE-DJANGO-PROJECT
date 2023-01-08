@@ -130,16 +130,12 @@
         <div class="row mt-5">
           <hr></hr>
           <div class="col-md-12">
-            {% if object %}
-            <button type="submit" class="btn btn-danger float-end">Update</button>
-            {% else %}
-            <button type="submit" class="btn btn-danger float-end">Upload</button>
-            {% endif %}
+            <button type="submit" class="btn btn-danger float-end">
+              {% if object %}Update{% else %}Upload{% endif %}
+            </button>
             <button type="reset" class="btn btn-secondary me-2 float-end">Reset</button>
           </div>
         </div>
-
-
       </form>
     </div>
   </div>

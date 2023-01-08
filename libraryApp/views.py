@@ -802,7 +802,7 @@ class AdminThesisInline():
         form.instance.submission_agreement = True
 
         title = form.instance.title
-        if form.instance.uploaded_by == None:
+        if not self.object:
             form.instance.uploaded_by = self.request.user
         self.object = form.save()
 
