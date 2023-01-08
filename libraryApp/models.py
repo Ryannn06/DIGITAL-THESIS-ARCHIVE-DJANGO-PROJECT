@@ -106,7 +106,7 @@ class thesisDB(Model):
 	submission_agreement = models.BooleanField(default=False)
 
 	def save(self, *args, **kwargs):
-		self.title = self.title.title()
+		#self.title = self.title.title()
 		#self.author = self.author.title()
 		self.slug = slugify(self.title + str(self.published_year))
 		super().save(*args, **kwargs)
