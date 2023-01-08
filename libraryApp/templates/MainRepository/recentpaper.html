@@ -12,7 +12,7 @@
 					<h5><a href="{% url 'view_studthesis' post.slug %}" class="text-decoration-none text-primary">{{post.title}}</a></h5>	
 					By
 					{% for author in post.thesis.all %}
-					<span class="me-1">{{author.first_name}} {{author.last_name}}</span>
+					<span class="me-1 text-decoration-underline">{{author.first_name}} {{author.last_name}}</span>
 					{% endfor %}
 				</div>
 			</div>

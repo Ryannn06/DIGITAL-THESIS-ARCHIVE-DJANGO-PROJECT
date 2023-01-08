@@ -13,7 +13,7 @@
             <div class="content">
                 <p class="m-0"><i class="bi bi-person pe-1"></i>By
                     {% for author in post.thesis.all %}
-                        <span class="me-1">{{author.first_name}} {{author.last_name}}</span>
+                        <span class="me-1 text-decoration-underline">{{author.first_name}} {{author.last_name}}</span>
                     {% endfor %}
                 </p>
                 <p class="m-0"><i class="bi bi-person-fill pe-1"></i>Advised by
