@@ -12,11 +12,15 @@ class RegisterForm(UserCreationForm):
     last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last Name','required':'required',}))
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username','required':'required',}))
     
+    error_messages = {
+            'username': {
+                'unique': ("Username already exists"),
+            },
+        }
+
     class Meta:
         model = Registrations
         fields = ['username','first_name','last_name','email','password1','password2']
-
-
 
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
@@ -24,7 +28,7 @@ class RegisterForm(UserCreationForm):
         self.fields['email'].help_text = "Use only valid TUP Cavite gsfe account"
 
     def clean_email(self):
-        pattern_with_email = "[a-z].[a-z]@[g][s][f][e].[t][u][p][c][a][v][i][t][e].[e][d][u].[p][h]"
+        pattern_with_email = "[a-z,-_,]@[g][s][f][e].[t][u][p][c][a][v][i][t][e].[e][d][u].[p][h]"
         data_2 = self.cleaned_data['email'] 
 
         if not re.search(pattern_with_email, data_2):

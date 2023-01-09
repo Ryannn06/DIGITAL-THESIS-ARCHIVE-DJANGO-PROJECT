@@ -10,7 +10,7 @@ from django.core.validators import RegexValidator
 
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, MinLengthValidator
 
 from hitcount.models import HitCountMixin, HitCount
 from django.contrib.contenttypes.fields import GenericRelation
@@ -95,7 +95,7 @@ class thesisDB(Model):
 	date_created = models.DateField(auto_now_add=True, blank=True, null=True )
 	uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
 	published_status = models.CharField(max_length=10, choices= THESIS_DECISION, default='Pending')
-	abstract = models.TextField(blank=True, null=True)
+	abstract = models.TextField(blank=True, null=True, validators=[MinLengthValidator(50, 'the field must be at least 50 characters')])
 	hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
 	reason = models.TextField(blank=True, null=True)
 	previous_reason = models.TextField(blank=True, null=True)
