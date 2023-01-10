@@ -497,7 +497,7 @@ def tagged(request, slug):
 
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(post, 5)
+    paginator = Paginator(post, 10)
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -527,7 +527,7 @@ def course_sort(request, slug):
 
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(datas, 5)
+    paginator = Paginator(datas, 10)
     try:
         data = paginator.page(page)
     except PageNotAnInteger:
@@ -724,7 +724,7 @@ class ThesisInline():
                 formset.save()
 
         if self.object:
-            message = "Your thesis entitled %s has been resubmitted successfully! We will notify you through email if it is once evaluated" % title
+            message = "Your thesis entitled %s has been submitted successfully! We will notify you through email if it is once evaluated" % title
         else:
             message = "Your thesis entitled %s has been submitted successfully! We will notify you through email if it is once evaluated" % title
 
