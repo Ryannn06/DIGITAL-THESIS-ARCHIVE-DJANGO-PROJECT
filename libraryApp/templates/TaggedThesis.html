@@ -43,9 +43,15 @@
 		<div class="col-lg-12">
 		<div class="btn-group float-end paginating" role="group" aria-label="Item pagination">
 		    {% if thesis_details.has_previous %}
+		        {% if search_paper %}
+		        <a href="?search_paper={{search_paper}}&page={{ thesis_details.previous_page_number }}" class="btn btn-prev btn-outline-danger">
+		            Prev
+		        </a>
+		        {% else %}
 		        <a href="?page={{ thesis_details.previous_page_number }}" class="btn btn-prev btn-outline-danger">
 		            Prev
 		        </a>
+		        {% endif %}
 		    {% endif %}
 
 		    {% for page_number in thesis_details.paginator.page_range %}
@@ -54,16 +60,28 @@
 		                <span>{{ page_number }} <span class="sr-only"></span></span>
 		            </button>
 		        {% else %}
+		        	{% if search_paper %}
+		            <a href="?search_paper={{search_paper}}&page={{ page_number }}" class="btn btn-pending btn-outline-danger">
+		                {{ page_number }}
+		            </a>
+		            {% else %}
 		            <a href="?page={{ page_number }}" class="btn btn-pending btn-outline-danger">
 		                {{ page_number }}
 		            </a>
+		            {% endif %}
 		        {% endif %}
 		    {% endfor %}
 
 		    {% if thesis_details.has_next %}
+		        {% if search_paper %}
+		        <a href="?search_paper={{search_paper}}&page={{ thesis_details.next_page_number }}" class="btn btn-next btn-outline-danger">
+		            Next
+		        </a>
+		        {% else %}
 		        <a href="?page={{ thesis_details.next_page_number }}" class="btn btn-next btn-outline-danger">
 		            Next
 		        </a>
+		        {% endif %}
 		    {% endif %}
 		</div>
 		</div>
