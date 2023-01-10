@@ -44,7 +44,7 @@
 		<div class="btn-group float-end paginating" role="group" aria-label="Item pagination">
 		    {% if thesis_course_details.has_previous %}
 		    	{% if search_paper %}
-		        <a href="?search_paper={{search_paper}}page={{ thesis_course_details.previous_page_number }}" class="btn btn-prev btn-outline-danger">
+		        <a href="?search_paper={{search_paper}}&page={{ thesis_course_details.previous_page_number }}" class="btn btn-prev btn-outline-danger">
 		            Prev
 		        </a>
 		        {% else %}
@@ -61,7 +61,7 @@
 		            </button>
 		        {% else %}
 		        	{% if search_paper %}
-		            <a href="?search_paper={{search_paper}}page={{ page_number }}" class="btn btn-pending btn-outline-danger">
+		            <a href="?search_paper={{search_paper}}&page={{ page_number }}" class="btn btn-pending btn-outline-danger">
 		                {{ page_number }}
 		            </a>
 		            {% else %}
@@ -74,7 +74,7 @@
 
 		    {% if thesis_course_details.has_next %}
 		    	{% if search_paper %}
-		        <a href="?search_paper={{search_paper}}page={{ thesis_course_details.next_page_number }}" class="btn btn-next btn-outline-danger">
+		        <a href="?search_paper={{search_paper}}&page={{ thesis_course_details.next_page_number }}" class="btn btn-next btn-outline-danger">
 		            Next
 		        </a>
 		        {% else %}
