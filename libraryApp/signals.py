@@ -37,9 +37,9 @@ def generate_citations(sender, instance, created, *args, **kwargs):
 	#print(chicago_formatted_author)
 
 	#generate citations
-	apa = str(apa_formatted_author + ' (' + year + '). ' + thesis.title + '. Retrieved from ' + retrieved_url + '.' )
+	apa = str(apa_formatted_author + ' (' + year + '). ' + thesis.title + '.' )
 	mla = str(mla_formatted_author + ' "' + thesis.title + '." ' + 'TUPC Digital Thesis Archive, ' + year + '. Web.')
-	chicago = str(chicago_formatted_author + ' ' + year + '. "' + thesis.title + '." ' + 'TUPC Digital Thesis Archive. ' + month_name + ' ' + year + '. ' + retrieved_url + '.')
+	chicago = str(chicago_formatted_author + ' ' + year + '. "' + thesis.title + '." ' + 'TUPC Digital Thesis Archive. ' + month_name + ' ' + year + '.')
 
 	#save or update citations
 	thesisDB.objects.filter(thesis_id = instance.thesis_id).update(apa = apa, mla=mla, chicago=chicago)

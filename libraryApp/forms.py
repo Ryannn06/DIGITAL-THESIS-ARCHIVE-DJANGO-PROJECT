@@ -51,6 +51,7 @@ class thesisForm(forms.ModelForm):
         labels = {
             'apa': ('APA'),
             'mla': ('MLA'),
+            'tags': ('Keywords'),
             'submission_agreement': ('Please check this if you agree to the terms above')
         }
 
@@ -92,6 +93,7 @@ class AdminthesisForm(forms.ModelForm):
         labels = {
             'apa': ('APA'),
             'mla': ('MLA'),
+            'tags': ('Keywords'),
         }
 
     def __init__(self, *args, **kwargs):
@@ -133,12 +135,15 @@ class departmentForm(forms.ModelForm):
             'department_name': {
                 'unique': ("Department Name already exists"),
             },
+            'department_abbreviation': {
+                'unique': ("Department Name already exists"),
+            },
         }
         widgets = {
             'department_name': forms.TextInput(attrs=
                 {'placeholder': 'Department Name', 'class':'form-control', 'required': 'required'}),
-            'department_head': forms.TextInput(attrs=
-                {'placeholder': 'Department Head', 'class':'form-control', 'required': 'required'}),
+            'department_abbreviation': forms.TextInput(attrs=
+                {'placeholder': 'Department abbv.', 'class':'form-control', 'required': 'required'}),
         }
 
 
@@ -150,6 +155,7 @@ class courseForm(forms.ModelForm):
         coldep_id = forms.ModelChoiceField(queryset=ColDept.objects.all().order_by('-id'),)
         labels = {
             'coldep_id': ('Department'),
+            'course_name': ('Program'),
         }
         error_messages = {
             'course_name': {

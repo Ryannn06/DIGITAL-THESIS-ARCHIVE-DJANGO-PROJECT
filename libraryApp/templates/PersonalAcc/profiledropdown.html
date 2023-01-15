@@ -3,20 +3,20 @@
     My Account
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-    <li><a class="dropdown-item" href="{% url 'profile' %}">
-        Edit Profile</a>
-    </li>
     <li><a class="dropdown-item" href="{% url 'password_change' %}">
         Change Password</a>
     </li>
-    <li><a class="dropdown-item" href="{% url 'submission' %}">
-        Submit Project</a>
+    <li><a class="dropdown-item" href="{% url 'profile' %}">
+        My Profile</a>
     </li>
     <li><a class="dropdown-item" href="{% url 'personal_repo' %}">
         My Repository</a>
     </li>
     <li><a class="dropdown-item" href="{% url 'personal_access' %}">
         My Access Requests</a>
+    </li>
+    <li><a class="dropdown-item" href="{% url 'submission' %}">
+        Submit Manuscript</a>
     </li>
   </ul>
 </li>

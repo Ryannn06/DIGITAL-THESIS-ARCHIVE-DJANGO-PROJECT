@@ -22,8 +22,20 @@
   color: #800000;
 }
 
+.navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.offcanvas {
+  width: 40%;
+}
+
 @media (max-width: 1150px) {
   .profilecontainer {
     padding: 2.5rem;
+  }
+  .offcanvas {
+    width: 100%;
   }
 }

@@ -23,9 +23,12 @@
                 </div>
 
                 <div class="row">
-                  <div class="col">
-                    <button type="submit" class="btn btn-danger mt-3 mb-3 float-end">Update</button>
-                    <button type="reset" class="btn btn-secondary mt-3 mb-3 me-2 float-end">Reset</button>
+                  <div class="col  mt-3 mb-3 ">
+                    <button type="submit" class="btn btn-danger float-end">Update</button>
+                    <button type="reset" class="btn btn-secondary me-2 float-end">Reset</button>
+                    <a href="{% url 'manage_course' %}" class="btn btn-secondary">
+                      Cancel
+                    </a>
                   </div>
                 </div>
              </form>

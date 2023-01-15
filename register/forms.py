@@ -58,6 +58,7 @@ class RegisterStaffForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_staff= True
         user.is_admin = True
+        user.is_verified = True
         if commit:
             user.save()
         return user

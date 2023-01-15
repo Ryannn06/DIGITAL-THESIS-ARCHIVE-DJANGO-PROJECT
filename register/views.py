@@ -36,6 +36,7 @@ def register(request):
             if form.is_valid():
                 user = form.save(commit=False)
                 user.is_active = False
+                user.is_verified = False
                 user.is_student = True
                 
                 user.save()
@@ -83,6 +84,7 @@ def activate(request, uidb64, token):
         user = None
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
+        user.is_verified = True
         user.save()
         # return redirect('home')
         messages.success(request,'Email Address has been verified successfully')

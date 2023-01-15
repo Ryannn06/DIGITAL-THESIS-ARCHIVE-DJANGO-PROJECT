@@ -13,8 +13,8 @@
           <div class="card cardheader p-3">
             <div class="row welcomebanner">
               <div class="col-lg-9 welcometext">
-                  <h4>Course Management</h4>
-                  <p>This is the management for courses in the system
+                  <h4>Program Management</h4>
+                  <p>This is the management for programs in the system
                   </p>
               </div>
               <div class="col-lg-3">
@@ -24,8 +24,8 @@
           </div>
       </div>
       <div class="col-lg-12 mt-5">
-          <h4 class="textmaroon">Course Registrations</h4>
-          <p>Try to register a course here under a particular registered department.</p>
+          <h4 class="textmaroon">Program Registration</h4>
+          <p>Register a program here under a particular registered department.</p>
           <hr></hr>
           <form method="post" class="courseform" enctype="multipart/form-data">
               {% csrf_token %}
@@ -44,14 +44,14 @@
       </div>
         
       <div class="col-lg-12 mt-5">
-          <h4 class="textmaroon">Registered Courses</h4>
-          <p>Here shows the registered courses in the system.</p>
+          <h4 class="textmaroon">Registered Programs</h4>
+          <p>Here shows the registered programs in the system.</p>
           <hr></hr>
           <table id="book_table" class="table table-hover table-bordered"  style="width: 100%;">
             <thead>
               <tr>
                 <th class="author" scope="col">Department</th>
-                <th class="author" scope="col">Course Name</th>
+                <th class="author" scope="col">Program Name</th>
                 <th class="author" scope="col">Action</th>
               </tr>           
             </thead>
@@ -64,6 +64,7 @@
                   <td>{{co.course_name}}</td>
                   <td>
                     <a href="{% url 'edit_course' co.slug %}" class="text-decoration-none text-decoration-none btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_course' co.slug %}" class="text-decoration-none btn btn-danger">Delete</a>
                 </td>
 
               </tr>

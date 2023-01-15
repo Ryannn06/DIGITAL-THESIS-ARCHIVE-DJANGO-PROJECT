@@ -43,8 +43,21 @@
             <p class="m-0"><i class="bi bi-calendar pe-1"></i>Date Joined: 
               {{reg_acc.date_joined}}
             </p>
-            <p class="m-0"><i class="bi bi-envelope pe-1"></i>Email Verification Status: 
+            <p class="m-0"><i class="bi bi-person-check-fill pe-1"></i>Activeness Status: 
               {% if reg_acc.is_active == True %}
+                <span class="fw-normal badge bg-success fs-6 border border-light">
+                    Active
+                    <i class="bi bi-check pe-1"></i>
+                </span>
+              {% else %}
+                <span class="fw-normal badge bg-danger fs-6 border border-light">
+                    Inactive
+                    <i class="bi bi-check pe-1"></i>
+                </span>
+              {% endif %}
+            </p>
+            <p class="m-0"><i class="bi bi-envelope pe-1"></i>Email Verification Status: 
+              {% if reg_acc.is_verified == True %}
                 <span class="fw-normal badge bg-success fs-6 border border-light">
                     Verified 
                     <i class="bi bi-check pe-1"></i>
@@ -56,6 +69,21 @@
                 </span>
               {% endif %}
             </p>
+            {% if reg_acc.is_active == True and reg_acc.is_staff == False %}
+            <hr>
+            <p>Deactivating account means disallowing user to login and access the system anymore. However, the account itself, its uploaded manuscripts and pdf access requests would not be removed.</p>
+            <a class="btn btn-danger float-end" href="{% url 'disable_account' reg_acc.id %}">Deactivate account</a>
+            
+            {% elif reg_acc.is_active == False and reg_acc.is_verified == True %}
+            <hr>
+            <p>This account can be reactivated. Reactivating this account means allowing the user to login and access the system again.</p>
+            <a class="btn btn-success float-end" href="{% url 'reactivate_account' reg_acc.id %}">Reactivate account</a>
+            
+            {% elif reg_acc.is_active == False and reg_acc.is_verified == False  %}
+            <hr>
+            <p>This account can not be reactivated as it is unverified yet.</p>
+            <a class="btn btn-success float-end disabled" href="{% url 'reactivate_account' reg_acc.id %}">Reactivate account</a>
+            {% endif %}
           </div>
         </div>
       </div>

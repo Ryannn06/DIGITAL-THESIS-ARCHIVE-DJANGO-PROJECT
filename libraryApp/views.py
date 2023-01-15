@@ -67,7 +67,11 @@ def index(request):
         else:
             raise PermissionDenied()
 
-    return render(request, 'Home.html')
+    thesis_no = thesisDB.objects.filter(published_status='Approved').count()
+    context = {
+        'thesis_no':thesis_no
+    }
+    return render(request, 'Home.html', context)
 
 
 def auth_login(request):
@@ -141,6 +145,9 @@ def dashboard(request):
     total_dept = ColDept.objects.all().count()
     total_course = ColCourse.objects.all().count()
 
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     content = {
         'new_book':new_book,
         'book_available':book_available,
@@ -169,6 +176,9 @@ def manage_approved(request):
 
     course = ColCourse.objects.annotate(count = Count('thesisdb', filter=Q(thesisdb__published_status='Approved'))).order_by('course_name')
 
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     thesisdetail_ = {
         "thesis_details": data,
         'approve_no':approve_no,
@@ -181,11 +191,14 @@ def manage_approved(request):
 @login_required
 @for_admin
 def manage_pending(request):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     to_approve = thesisDB.objects.filter(published_status='Pending').prefetch_related('thesis')
     pending_no = thesisDB.objects.filter(published_status='Pending').count()
 
     course = ColCourse.objects.annotate(count = Count('thesisdb', filter=Q(thesisdb__published_status='Pending'))).order_by('course_name')
-
+    
     thesisdetail_ = {
         "details":to_approve,
         "pending_no":pending_no,
@@ -198,6 +211,9 @@ def manage_pending(request):
 @login_required
 @for_admin
 def manage_rejected(request):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     rejected = thesisDB.objects.filter(published_status='Rejected').prefetch_related('thesis')
     reject_no = thesisDB.objects.filter(published_status='Rejected').count()
     course = ColCourse.objects.annotate(count = Count('thesisdb', filter=Q(thesisdb__published_status='Rejected'))).order_by('course_name')
@@ -214,6 +230,9 @@ def manage_rejected(request):
 @login_required
 @for_admin
 def view_thesis(request, slug):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     detail = get_object_or_404(thesisDB.objects.prefetch_related('thesis'), slug=slug, published_status='Approved')
     return render(request, 'AdminThesisDetails.html', {'detail':detail,})
 
@@ -221,6 +240,9 @@ def view_thesis(request, slug):
 @login_required
 @for_admin
 def view_thesisreject(request, slug):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     detail = get_object_or_404(thesisDB.objects.prefetch_related('thesis'), slug=slug, published_status='Rejected')
     return render(request, 'AdminThesisDetails.html', {'detail':detail,})
 
@@ -228,6 +250,9 @@ def view_thesisreject(request, slug):
 @login_required
 @for_admin
 def evaluate(request, slug):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     details =  get_object_or_404(thesisDB.objects.prefetch_related('thesis'), slug=slug, published_status='Pending')
 
     form = EvaluateThesisForm(request.POST or None, instance = details)
@@ -278,6 +303,9 @@ def evaluate(request, slug):
 @login_required
 @for_admin
 def regAccounts(request):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     user = get_user_model()
     account = user.objects.filter(is_superuser=False)
 
@@ -291,6 +319,9 @@ def regAccounts(request):
 @login_required
 @for_admin
 def manage_course(request):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     data = ColCourse.objects.all()
 
     if request.method == "POST":
@@ -315,6 +346,9 @@ def manage_course(request):
 @login_required
 @for_admin
 def edit_course(request, slug):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     detail = get_object_or_404(ColCourse, slug=slug)
     form = courseForm(request.POST or None, instance = detail)
     if form.is_valid():
@@ -325,10 +359,33 @@ def edit_course(request, slug):
     return render(request, 'AdminEditCourse.html', {'detail': detail, 'form':form })
 
 
+@login_required
+@for_admin
+def delete_course(request, slug):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
+    course = get_object_or_404(ColCourse, slug=slug)
+    thesis = thesisDB.objects.filter(course= course.id)
+    course_name = course.course_name
+    
+    if thesis.exists():
+        message = "You cannot delete %s as %s manuscript/s is/are found registered under this." % (course_name, str(len(thesis)))
+        messages.error(request, message)
+    else:
+        course.delete()
+        message = "The %s has successfully been deleted." % (course_name)
+        messages.success(request, message)
+
+    return redirect ('/admin/manageCourse')
+
 
 @login_required
 @for_admin
 def manage_dept(request):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     data = ColDept.objects.all() #readd
 
     if request.method == "POST":  #add
@@ -351,6 +408,9 @@ def manage_dept(request):
 @login_required
 @for_admin
 def edit_dept(request, slug):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     detail = get_object_or_404(ColDept, slug=slug)
     form = departmentForm(request.POST or None, instance = detail)
     if form.is_valid():
@@ -364,7 +424,31 @@ def edit_dept(request, slug):
 
 @login_required
 @for_admin
+def delete_dept(request, slug):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
+    department = get_object_or_404(ColDept, slug=slug)
+    course = ColCourse.objects.filter(coldep_id= department.id)
+    department_name = department.department_name
+    
+    if course.exists():
+        message = "You cannot delete the department of %s as %s course/s is/are found registered under this." % (department_name, str(len(course)))
+        messages.error(request, message)
+    else:
+        department.delete()
+        message = "The department of %s has successfully been deleted." % (department_name)
+        messages.success(request, message)
+
+    return redirect ('/admin/manageDepartment')
+
+
+@login_required
+@for_admin
 def profile_staff(request):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     if request.method == 'POST':
         user_form = UpdateUserStaffForm(request.POST, instance=request.user)
 
@@ -382,6 +466,9 @@ def profile_staff(request):
 @login_required
 @for_admin
 def manage_request(request):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     requests = RequestPDF.objects.filter(request_status='Pending')
     approved = RequestPDF.objects.filter(request_status='Approved')
     declined = RequestPDF.objects.filter(request_status='Declined')
@@ -397,6 +484,9 @@ def manage_request(request):
 @login_required
 @for_admin
 def evaluate_request(request, request_id):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     current_time = datetime.now()
     requests = get_object_or_404(RequestPDF.objects.prefetch_related('thesis'), id=request_id, request_status='Pending')
 
@@ -445,6 +535,9 @@ def evaluate_request(request, request_id):
 @login_required
 @for_admin
 def acc_details(request, user_id):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     account = get_user_model()
     reg_acc = get_object_or_404(account, pk=user_id)
     submitted_projects = thesisDB.objects.filter(uploaded_by=user_id)
@@ -455,6 +548,38 @@ def acc_details(request, user_id):
     }
 
     return render(request, 'AdminAccDetails.html', content)
+
+
+@login_required
+@for_admin
+def disable_account(request, user_id):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
+    accounts = get_user_model()
+    
+    user = get_object_or_404(accounts, id=user_id, is_active=True, is_staff=False)
+    user.is_active = False
+    user.save()
+
+    messages.success(request, 'Account has successfully been deactivated!')
+    return redirect('/admin/registeredAccounts')
+
+
+@login_required
+@for_admin
+def reactivate_account(request, user_id):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
+    accounts = get_user_model()
+    
+    user = get_object_or_404(accounts, id=user_id, is_verified=True, is_active=False)
+    user.is_active = True
+    user.save()
+
+    messages.success(request, 'Account has successfully been reactivated!')
+    return redirect('/admin/registeredAccounts')
 
 
 @login_required
@@ -693,7 +818,7 @@ class ThesisInline():
 
     def get_object(self, queryset=None):
         obj = super(ThesisInline, self).get_object(queryset)
-        if obj.published_status == 'Approved' or obj.published_status == 'Pending' :
+        if obj.published_status == 'Approved':
             raise PermissionDenied()
         else:
             return obj
@@ -881,6 +1006,9 @@ def personal_access(request):
 @login_required
 @for_admin
 def approvedprojects_csv(request):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+
     response = HttpResponse(content_type='text/csv')
     writer = csv.writer(response)
 
@@ -898,6 +1026,9 @@ def approvedprojects_csv(request):
 @login_required
 @for_admin
 def regaccs_csv(request):
+    request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
+    request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
+    
     response = HttpResponse(content_type='text/csv')
     writer = csv.writer(response)
 
@@ -911,3 +1042,15 @@ def regaccs_csv(request):
     
     response['Content-Disposition'] =  'attachment; filename = "Registered_Accounts.csv"'
     return response
+
+
+@login_required
+@for_students
+def delete_thesis(request, slug):
+    thesis = get_object_or_404(thesisDB, Q(published_status='Pending') | Q(published_status='Rejected'), uploaded_by=request.user, slug=slug) 
+    thesis.delete()
+
+    message = "Thesis has successfully been deleted!"
+    messages.success(request, message)
+
+    return redirect('/personal_repository')

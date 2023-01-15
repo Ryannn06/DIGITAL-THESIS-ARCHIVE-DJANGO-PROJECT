@@ -41,8 +41,13 @@ urlpatterns = [
     path('admin/manageDepartment/', views.manage_dept, name='manage_dept'),
     path('admin/manageCourse/', views.manage_course, name='manage_course'),
     path('admin/editDepartment/<slug:slug>', views.edit_dept, name='edit_dept'),
+    path('admin/deleteDepartment/<slug:slug>', views.delete_dept, name='delete_dept'),
     path('admin/editCourse/<slug:slug>', views.edit_course, name='edit_course'),
+    path('admin/deleteCourse/<slug:slug>', views.delete_course, name='delete_course'),
 
+    path('admin/disable_account/<user_id>', views.disable_account, name='disable_account'),
+    path('admin/reactivate_account/<user_id>', views.reactivate_account, name='reactivate_account'),
+    
     path('profile_staff/', views.profile_staff, name='profile_staff'),
 
     #User URLS
@@ -59,6 +64,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('personal_repository/', views.personal_repo, name='personal_repo'),
     path('personal_access/', views.personal_access, name='personal_access'),
+    path('delete_thesis/<slug:slug>', views.delete_thesis, name='delete_thesis'),
 
     re_path(r'^media/(?P<path>.*)$', views.protected_serve, {'document_root': settings.MEDIA_ROOT}),
 

@@ -13,9 +13,9 @@
 
     {% for detail in approved %}
     <tr>
-      <td>{{detail.user}}</td>
+      <td><a href="{% url 'acc_details' detail.user.id %}" class="text-decoration-none">{{detail.user}}</a></td>
       <td>{{detail.user.email}}</td>
-      <td>{{detail.thesis.title}}</td>
+      <td><a href="{% url 'view_thesis' detail.thesis.slug %}" class="text-decoration-none">{{detail.thesis.title}}</a></td>
       <td>{{detail.date_evaluated}}</td>
       <td>{{detail.reason}}</td>
     </tr>

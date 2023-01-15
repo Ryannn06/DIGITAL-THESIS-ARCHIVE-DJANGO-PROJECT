@@ -2,6 +2,7 @@
   margin: 0 0 0 0;
   padding: 5rem 5rem 5rem 5rem;
   font-family: Lato;
+  min-height: 100vh;
 }
 
 .textmaroon {
@@ -16,8 +17,28 @@
   gap: 0;
 }
 
+.offcanvas {
+  width: 50%;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardthesis {
+  height: 40vh;
+}
+
+.offcanvas-header {
+  background: #F5F5F5;
+}
 @media (max-width: 1150px) {
   .repocontainer {
     padding: 2.5rem;
   }
+  .offcanvas {
+  width: 100%;
+}
 }

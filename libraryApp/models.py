@@ -28,7 +28,7 @@ from datetime import date
 
 class ColDept(Model):
 	department_name = models.CharField(max_length=200, blank=True, null=True, verbose_name='Department', unique=True)
-	department_abbreviation = models.CharField(max_length=200, blank=True, null=True)
+	department_abbreviation = models.CharField(max_length=200, blank=True, null=True, unique=True)
 	slug = models.SlugField(max_length = 250, null = True, blank = True) 
 
 	def save(self, *args, **kwargs):
@@ -134,6 +134,7 @@ class Registrations(AbstractUser):
 	email = models.EmailField(unique=True)
 	is_student = models.BooleanField(default=False)
 	is_admin = models.BooleanField(default=False)
+	is_verified = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.first_name +" "+ self.last_name

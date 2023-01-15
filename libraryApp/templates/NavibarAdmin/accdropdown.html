@@ -3,9 +3,7 @@
     Community
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-    <li><a class="dropdown-item" href="{% url 'manageRequests' %}">
-        PDF Access Requests</a>
-    </li>
+    <li class="position-relative"><a class="dropdown-item" href="{% url 'manageRequests' %}">PDF Access Requests <span class="position-absolute top-0 start-100 translate-middle badge bg-danger fw-normal">{{request.session.pending_pdfrequest}}</span></a></li>
     <li><a class="dropdown-item" href="{% url 'regAccounts' %}">Registered Accounts</a></li>
   </ul>
 </li>

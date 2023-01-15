@@ -13,12 +13,11 @@
 {% include 'Navibar.html' %}
 <div class="container-fluid profilecontainer">
   <div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8 bodycontent">
+    <div class="col-lg-12 bodycontent">
       {% if object %}
-      <h4 class="textmaroon">Update A Project</h4>
+      <h4 class="textmaroon">Update Manuscript</h4>
       {% else %}
-      <h4 class="textmaroon">Upload A Project</h4>
+      <h4 class="textmaroon">Upload Manuscript</h4>
       {% endif %}
       <p>Thesis projects uploaded by the admin account would automatically be accessible to the system.<p>
       <hr></hr>
@@ -26,112 +25,142 @@
       <form enctype="multipart/form-data" method="post" id="product_form">
         {% csrf_token %}
         <!-- main form start --- in our case product form -->
-        <div class="card mt-5">
-          <div class="card-header">
-            <h4 class="textmaroon">Describe the thesis</h4>
-            <p class="text-muted">Define the thesis project</p>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12">
-                {{form.title | as_crispy_field }}
-              </div>
-              <div class="col-md-12">
-                {{form.adviser | as_crispy_field }}
-              </div>
-              <div class="col-md-12">
-                {{form.published_year | as_crispy_field }}
-              </div>
-              <div class="col-md-12">
-                {{form.published_month | as_crispy_field }}
-              </div>
-              <div class="col-md-12">
-                {{form.course | as_crispy_field }}
-              </div>
-              <div class="col-md-12">
-                {{form.tags | as_crispy_field }}
-              </div>
-              <div class="col-md-12">
-                {{form.abstract | as_crispy_field }}
-              </div>
-            </div>
+        <div class="mt-5 mb-3">
+          <div class="row">
+            <h4 class="textmaroon">Submission Form</h4>
+            <p class="text-muted">Please fill the required information below</p>
+            <hr></hr>
           </div>
         </div>
 
-        {% with named_formsets.variants as formset %}
-            {{ formset.management_form }}
-            <script type="text/html" id="variants-template">  // id="inlineformsetname-template"
-                // id='inlineformsetname-__prefix__' 
-                <tr id="variants-__prefix__" class= hide_all>
-                    {% for fields in formset.empty_form.hidden_fields %}
-                        {{ fields }}
-                    {% endfor %}
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="textmaroon">Describe the thesis</h4>
+                <p class="text-muted">Define the thesis project</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    {{form.title | as_crispy_field }}
+                  </div>
+                  <div class="col-md-12">
+                    {{form.adviser | as_crispy_field }}
+                  </div>
+                  <div class="col-md-12">
+                    {{form.published_year | as_crispy_field }}
+                  </div>
+                  <div class="col-md-12">
+                    {{form.published_month | as_crispy_field }}
+                  </div>
+                  <div class="col-md-12">
+                    {{form.course | as_crispy_field }}
+                  </div>
+                  <div class="col-md-12">
+                    {{form.tags | as_crispy_field }}
+                  </div>
+                  <div class="col-md-12">
+                    {{form.abstract | as_crispy_field }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% with named_formsets.variants as formset %}
+                {{ formset.management_form }}
+                <script type="text/html" id="variants-template">  // id="inlineformsetname-template"
+                    // id='inlineformsetname-__prefix__' 
+                    <tr id="variants-__prefix__" class= hide_all>
+                        {% for fields in formset.empty_form.hidden_fields %}
+                            {{ fields }}
+                        {% endfor %}
+                    
+                        {% for fields in formset.empty_form.visible_fields %}
+                            <td>{{fields}}</td>
+                        {% endfor %}
+                    </tr>
+                </script>
+                <div class="card mt-5 mb-5">
+                    <div class="card-header">
+                        <h4 class="textmaroon">Add Authors</h4>
+                        <p class="text-muted">Enter the authors of the thesis</p>
+                    </div>
+                    <div class="card-body">
+                      <table class="table">
+                          <thead>
+                              <th class="fw-normal">First Name</th>
+                              <th class="fw-normal">Last Name</th>
+                              <th class="fw-normal">Delete?</th>
+                          </thead>
+                          <tbody id="item-variants">  <!-- id="item-inlineformsetname" -->
+                              <!-- formset non forms errors -->
+                              {% for error in formset.non_form_errors %}
+                                  <span style="color: red">{{ error }}</span>
+                              {% endfor %}
+                              {% for formss in formset %}
+                                  {{ formss.management_form }}
+                                  <tr id="variants-{{ forloop.counter0 }}" class= hide_all>  <!-- id="inlineformsetname-counter" -->
+                                      {{ formss.id }}
+                                      {% for field in formss.visible_fields %}
+                                          <td>
+                                              {{field}}
+                                              {% for error in field.errors %}
+                                                  <span style="color: red">{{ error }}</span>
+                                              {% endfor %}
+                                              
+                                              {% comment %} {{ field.DELETE }} {% endcomment %}
+                                          </td>
+                                      {% endfor %}
+                                  </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                      <a href="#" id="add-variant-button" class="btn btn-danger add-variants">Add Author</a> <!-- id="add-inlineformsetname-button" -->
+                    </div>
+                </div>
                 
-                    {% for fields in formset.empty_form.visible_fields %}
-                        <td>{{fields}}</td>
-                    {% endfor %}
-                </tr>
-            </script>
-            <div class="card mt-5">
-                <div class="card-header">
-                    <h4 class="textmaroon">Add Authors</h4>
-                    <p class="text-muted">Enter the authors of the thesis</p>
-                </div>
-                <div class="card-body">
-                  <table class="table">
-                      <thead>
-                          <th class="fw-normal">First Name</th>
-                          <th class="fw-normal">Last Name</th>
-                          <th class="fw-normal">Delete?</th>
-                      </thead>
-                      <tbody id="item-variants">  <!-- id="item-inlineformsetname" -->
-                          <!-- formset non forms errors -->
-                          {% for error in formset.non_form_errors %}
-                              <span style="color: red">{{ error }}</span>
-                          {% endfor %}
-                          {% for formss in formset %}
-                              {{ formss.management_form }}
-                              <tr id="variants-{{ forloop.counter0 }}" class= hide_all>  <!-- id="inlineformsetname-counter" -->
-                                  {{ formss.id }}
-                                  {% for field in formss.visible_fields %}
-                                      <td>
-                                          {{field}}
-                                          {% for error in field.errors %}
-                                              <span style="color: red">{{ error }}</span>
-                                          {% endfor %}
-                                          
-                                          {% comment %} {{ field.DELETE }} {% endcomment %}
-                                      </td>
-                                  {% endfor %}
-                              </tr>
-                          {% endfor %}
-                      </tbody>
-                  </table>
-                  <a href="#" id="add-variant-button" class="btn btn-danger add-variants">Add Author</a> <!-- id="add-inlineformsetname-button" -->
-                </div>
-            </div>
-            
-        {% endwith %}
-
-        <div class="card mt-5">
-          <div class="card-header">
-            <h4 class="textmaroon">Document File</h4>
-            <p class="text-muted">Upload the softcopy of the thesis</p>
+            {% endwith %}
           </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12">
-                {{form.pdf | as_crispy_field }}
+          <div class="col-lg-5">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="textmaroon">Document File</h4>
+                <p class="text-muted">Upload the softcopy of the thesis</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    {{form.pdf | as_crispy_field }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-danger mt-5 mb-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Preview PDF File</button>
+
+            <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+              <div class="offcanvas-header">
+                <a class="btn btn-primary" id="prev">
+                  <i class="bi bi-arrow-left-circle"></i>
+                </a>
+                <p class="text-muted m-0"><span id="page_num"></span> / <span id="page_count"></span> Pages</p>
+                <a class="btn btn-primary float-end" id="next">
+                  <i class="bi bi-arrow-right-circle"></i>
+                </a>
+                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">PDF Preview</h5>
+                <a class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></a>
+              </div>
+              <div class="offcanvas-body">
+                <canvas class="container-fluid canvas" id="the-canvas"></canvas>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="row mt-5">
+        <div class="row">
           <hr></hr>
           <div class="col-md-12">
             <button type="submit" class="btn btn-danger float-end">
-              {% if object %}Update{% else %}Upload{% endif %}
+            {% if object %}Update{% else %}Upload{% endif %}
             </button>
             <button type="reset" class="btn btn-secondary me-2 float-end">Reset</button>
           </div>
@@ -157,6 +186,110 @@
           // update form count
           $('#id_variants-TOTAL_FORMS').attr('value', count+1);
       });
+  });
+
+  document.getElementById("id_pdf").addEventListener('change', function() {
+  
+    var url = URL.createObjectURL(event.target.files[0]);
+
+    // Loaded via <script> tag, create shortcut to access PDF.js exports.
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+
+    // The workerSrc property shall be specified.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+    var pdfDoc = null,
+        pageNum = 1,
+        pageRendering = false,
+        pageNumPending = null,
+        scale = 1,
+        zoom = 1,
+        canvas = document.getElementById('the-canvas'),
+
+        ctx = canvas.getContext('2d');
+
+    /**
+     * Get page info from document, resize canvas accordingly, and render page.
+     * @param num Page number.
+     */
+    function renderPage(num) {
+      pageRendering = true;
+      // Using promise to fetch the page
+      pdfDoc.getPage(num).then(function(page) {
+        var viewport = page.getViewport({scale: scale});
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        // Render PDF page into canvas context
+        var renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+        var renderTask = page.render(renderContext);
+
+        // Wait for rendering to finish
+        renderTask.promise.then(function() {
+          pageRendering = false;
+          if (pageNumPending !== null) {
+            // New page rendering is pending
+            renderPage(pageNumPending);
+            pageNumPending = null;
+          }
+        });
+      });
+
+      // Update page counters
+      document.getElementById('page_num').textContent = num;
+    }
+
+    /**
+     * If another page rendering in progress, waits until the rendering is
+     * finised. Otherwise, executes rendering immediately.
+     */
+    function queueRenderPage(num) {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
+    }
+
+    /**
+     * Displays previous page.
+     */
+    function onPrevPage() {
+      if (pageNum <= 1) {
+        return;
+      }
+
+      pageNum--;
+      queueRenderPage(pageNum);
+    }
+    document.getElementById('prev').addEventListener('click', onPrevPage);
+
+    /**
+     * Displays next page.
+     */
+    function onNextPage() {
+      if (pageNum >= pdfDoc.numPages) {
+        return;
+      }
+      pageNum++;
+      queueRenderPage(pageNum);
+    }
+    document.getElementById('next').addEventListener('click', onNextPage);
+
+
+    /**
+     * Asynchronously downloads PDF.
+     */
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+      pdfDoc = pdfDoc_;
+      document.getElementById('page_count').textContent = pdfDoc.numPages;
+      // Initial/first page rendering
+      renderPage(pageNum);
+
+    });
   });
 </script>
 {% endblock script %}

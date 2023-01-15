@@ -21,8 +21,20 @@
 	color: #800000;
 }
 
+.navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.offcanvas {
+  width: 40%;
+}
+
 @media screen and (max-width: 1150px) {
   .bodycontent {
       padding: 2.5rem;
+  }
+  .offcanvas {
+    width: 100%;
   }
 }

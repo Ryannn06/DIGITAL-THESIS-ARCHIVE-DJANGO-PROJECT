@@ -4,12 +4,12 @@
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
     <li>
-      <a class="dropdown-item" href="{% url 'add' %}">Add Project</a>
+      <a class="dropdown-item" href="{% url 'add' %}">Upload Manuscript</a>
     </li>
     <li>
-      <a class="dropdown-item" href="{% url 'manageApproved' %}">Approved Projects</a>
+      <a class="dropdown-item" href="{% url 'manageApproved' %}">Approved Manuscripts</a>
     </li>
-    <li><a class="dropdown-item" href="{% url 'managePending' %}">Pending Projects</a></li>
-    <li><a class="dropdown-item" href="{% url 'manageRejected' %}">Rejected Projects</a></li>
+    <li class="position-relative"><a class="dropdown-item" href="{% url 'managePending' %}">Pending Manuscripts <span class="position-absolute top-0 start-100 translate-middle badge bg-danger fw-normal">{{request.session.pending_thesis}}</span></a></li>
+    <li><a class="dropdown-item" href="{% url 'manageRejected' %}">Rejected Manuscripts</a></li>
   </ul>
 </li>

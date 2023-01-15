@@ -23,7 +23,11 @@
 	    </div>
 
 	    <div class="mt-5 row">
-
+	    	<div class="col-lg-12 mb-3">
+	    		<a href="{{ request.META.HTTP_REFERER }}" class="btn btn-danger">
+	    			<i class="bi bi-arrow-left-circle pe-1"></i>Back to previous page
+	    		</a>
+	    	</div>
 	    	{% if detail.previous_reason %}
 	    	<div class="col-lg-12 mb-5">
 	    		<div class="card bg-danger p-3">
@@ -33,7 +37,7 @@
 	    	</div>
 	    	{% endif %}
 
-	    	<div class="col-lg-6">
+	    	<div class="col-lg-6 mb-5">
 	    		<ul class="list-group list-group-flush card p-3">
 	    		    <li class="list-group-item m-0">
 	    		        <div>
@@ -75,23 +79,34 @@
 	    		</div>
 	    	</div>
 
-	    	<div class="col-lg-6">
-	    		
-	    		<div class="topbar mb-3">
-		    		 <button class="btn btn-primary" id="prev">
-		    		  	<i class="bi bi-arrow-left-circle"></i>
-		    		 </button>
-		    		 <p class="textcon pe-3"><i class="bi bi-file-earmark pe-1"></i><span id="page_num"></span> / <span id="page_count"></span> Pages</p>
-		    		 <button class="btn btn-primary float-end" id="next">
-		    		  	<i class="bi bi-arrow-right-circle"></i>
-		    		 </button>
+	    	<div class="col-lg-6 mb-5">
+	    		<div class="card p-3">
+	    			<p>Preview PDF File to compare the data and manuscript side by side</p>
+	    			<a class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Preview PDF File</a>
 	    		</div>
-	    		<canvas class="card container-fluid" id="the-canvas"></canvas>
-	    	</div>
 
+	    		<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+	    		 	<div class="offcanvas-header">
+	    		    	<a class="btn btn-primary" id="prev">
+	    		    	   	<i class="bi bi-arrow-left-circle"></i>
+	    		    	</a>
+	    		    	<p class="text-muted m-0"><span id="page_num"></span> / <span id="page_count"></span> Pages</p>
+	    		    	<a class="btn btn-primary float-end" id="next">
+	    		    	    <i class="bi bi-arrow-right-circle"></i>
+	    		    	</a>
+
+	    		    	<h5 class="offcanvas-title" id="offcanvasScrollingLabel">PDF File Preview</h5>
+	    		    	<a class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></a>
+	    		  	</div>
+	    		  	<div class="offcanvas-body">
+	    		    	<canvas class="container-fluid canvas" id="the-canvas"></canvas>
+	    		    	<div id="text-layer"></div>
+	    		  	</div>
+	    		</div>
+	    	</div>
 	    </div>
 
-	    <div class="mt-5 card p-4">
+	    <div class="card p-4">
     		<h4 class="textmaroon">Evaluate</h4>
     		<form method="POST" class="form-group">
     			{% csrf_token %}

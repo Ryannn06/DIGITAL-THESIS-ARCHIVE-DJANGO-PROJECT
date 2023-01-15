@@ -29,8 +29,15 @@
 	align-items: center;
 }
 
+.offcanvas {
+  width: 45%;
+}
+
 @media screen and (max-width: 1150px) {
 	.evaluatecontainer {
 	    padding: 2.5rem;
+	}
+	.offcanvas {
+  		width: 100%;
 	}
 }

@@ -1,7 +1,7 @@
 <div>
     <p class="textmaroon mb-0">APA</p>
     <a href="#" onclick="CopyToClipboard('APA');return false;" class="text-decoration-none">Copy citation</a>
-    <p id="APA">{{detail.apa}}</p>
+    <p id="APA">{{detail.apa}} Retrieved from {{request.get_host}}{{request.get_full_path}}</p>
 
     <p class="textmaroon mb-0">MLA</p>
     <a href="#" onclick="CopyToClipboard('MLA');return false;" class="text-decoration-none">Copy citation</a>
@@ -9,5 +9,5 @@
 
     <p class="textmaroon mb-0">Chicago</p>
     <a href="#" onclick="CopyToClipboard('Chicago');return false;" class="text-decoration-none">Copy citation</a>
-    <p id="Chicago">{{detail.chicago}}</p>
+    <p id="Chicago">{{detail.chicago}} {{request.get_host}}{{request.get_full_path}}.</p>
 </div>

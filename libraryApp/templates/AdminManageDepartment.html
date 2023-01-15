@@ -66,6 +66,7 @@
                     <td>{{dept.department_abbreviation}}</td>
                     <td>
                       <a href="{% url 'edit_dept' dept.slug %}" class="text-decoration-none btn btn-primary">Edit</a>
+                      <a href="{% url 'delete_dept' dept.slug %}" class="text-decoration-none btn btn-danger">Delete</a>
                   </td>
 
                 </tr>
