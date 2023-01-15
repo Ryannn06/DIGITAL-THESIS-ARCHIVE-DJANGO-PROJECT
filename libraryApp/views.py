@@ -1054,3 +1054,10 @@ def delete_thesis(request, slug):
     messages.success(request, message)
 
     return redirect('/personal_repository')
+
+
+@login_required
+def myrepo_pdfviewer(request, slug):
+    project = get_object_or_404(thesisDB, slug=slug, uploaded_by=request.user)
+
+    return render(request, 'PDFViewer.html', {'detail':project})

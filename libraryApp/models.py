@@ -10,7 +10,9 @@ from django.core.validators import RegexValidator
 
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
+
 from django.core.validators import FileExtensionValidator, MinLengthValidator
+from django.core.exceptions import ValidationError
 
 from hitcount.models import HitCountMixin, HitCount
 from django.contrib.contenttypes.fields import GenericRelation
@@ -59,6 +61,18 @@ class ColCourse(Model):
 		return self.course_name
 
 
+def validate_file_size(value):
+    filesize= value.size
+    print('hello, i reached here')
+    
+    if filesize > 31457280:
+        raise ValidationError("You cannot upload file more than 30Mb")
+        print('hello')
+    else:
+    	print(value, filesize)
+    	return value
+
+
 THESIS_DECISION = (
 	('Approved', 'Approve'),
 	('Rejected', 'Reject')
@@ -89,7 +103,7 @@ class thesisDB(Model):
 	adviser = models.CharField(max_length=200, blank=True, null=True)
 	published_year = models.IntegerField(choices=YEAR_CHOICES, default=date.today().year)
 	published_month = models.CharField(max_length=15, choices=MONTH_CHOICES, default='1')
-	pdf = models.FileField(upload_to='pdf/', blank=True, null=True ,validators=[FileExtensionValidator(['pdf'])],)
+	pdf = models.FileField(upload_to='pdf/', blank=True, null=True ,validators=[FileExtensionValidator(['pdf']), validate_file_size],)
 	course = models.ForeignKey(ColCourse, default=None, on_delete=models.CASCADE, verbose_name='Course')
 	tags = TaggableManager()
 	date_created = models.DateField(auto_now_add=True, blank=True, null=True )

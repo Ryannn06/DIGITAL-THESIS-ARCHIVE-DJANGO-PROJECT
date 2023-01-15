@@ -63,6 +63,7 @@ urlpatterns = [
     path('viewPDF/<slug:slug>', views.viewPDF, name='viewPDF'),
     path('profile/', views.profile, name='profile'),
     path('personal_repository/', views.personal_repo, name='personal_repo'),
+    path('myrepo_pdfviewer/<slug:slug>', views.myrepo_pdfviewer, name='myrepo_pdfviewer'),
     path('personal_access/', views.personal_access, name='personal_access'),
     path('delete_thesis/<slug:slug>', views.delete_thesis, name='delete_thesis'),
 
