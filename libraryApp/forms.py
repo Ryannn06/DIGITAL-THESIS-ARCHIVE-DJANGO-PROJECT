@@ -1,7 +1,7 @@
 from django import forms
 from .models import *
 from ckeditor.widgets import CKEditorWidget
-from django.core.exceptions import ValidationError
+
 from django.forms import inlineformset_factory
 
 import re
@@ -136,7 +136,7 @@ class departmentForm(forms.ModelForm):
                 'unique': ("Department Name already exists"),
             },
             'department_abbreviation': {
-                'unique': ("Department Name already exists"),
+                'unique': ("Department Abbreviation already exists"),
             },
         }
         widgets = {
@@ -159,12 +159,12 @@ class courseForm(forms.ModelForm):
         }
         error_messages = {
             'course_name': {
-                'unique': ("Course Name already exists"),
+                'unique': ("Program Name already exists"),
             },
         }
         widgets = {
             'course_name': forms.TextInput(attrs=
-                {'placeholder': 'Course Name', 'class':'form-control', 'required': 'required'}),
+                {'placeholder': 'Program Name', 'class':'form-control', 'required': 'required'}),
         }
 
 

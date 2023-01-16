@@ -17,7 +17,7 @@
       <td>{{detail.user.email}}</td>
       <td>{{detail.thesis.title}}</td>
       <td>{{detail.request_date}}</td>
-      <td><a href="{% url 'evaluateRequests' detail.id %}" class="text-decoration-none btn btn-primary">Evaluate</a></td>
+      <td><a href="{% url 'evaluateRequests' detail.id %}" class="text-decoration-none btn btn-primary {% if not detail.user.is_active == True %}disabled{% endif %}">Evaluate</a></td>
     </tr>
     {% endfor %}        
 

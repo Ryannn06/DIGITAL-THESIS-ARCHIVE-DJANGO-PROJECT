@@ -253,7 +253,7 @@ def evaluate(request, slug):
     request.session['pending_thesis'] = thesisDB.objects.filter(published_status='Pending').count()
     request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
 
-    details =  get_object_or_404(thesisDB.objects.prefetch_related('thesis'), slug=slug, published_status='Pending')
+    details =  get_object_or_404(thesisDB.objects.prefetch_related('thesis'), slug=slug, published_status='Pending', uploaded_by__is_active=True)
 
     form = EvaluateThesisForm(request.POST or None, instance = details)
     if form.is_valid():
@@ -488,7 +488,7 @@ def evaluate_request(request, request_id):
     request.session['pending_pdfrequest'] = RequestPDF.objects.filter(request_status='Pending').count()
 
     current_time = datetime.now()
-    requests = get_object_or_404(RequestPDF.objects.prefetch_related('thesis'), id=request_id, request_status='Pending')
+    requests = get_object_or_404(RequestPDF.objects.prefetch_related('thesis'), id=request_id, request_status='Pending', user__is_active=True)
 
     form = EvaluateRequestForm(request.POST or None, instance=requests)
     if form.is_valid():

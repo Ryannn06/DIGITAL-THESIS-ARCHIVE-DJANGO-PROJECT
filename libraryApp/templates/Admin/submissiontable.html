@@ -25,7 +25,9 @@
       <td>{{post.get_published_month_display}} {{post.published_year}}</td>
       <td>{{post.uploaded_by.first_name}} {{post.uploaded_by.last_name}}</td>
       <td>{{post.date_created}}</td>
-      <td><a href="{% url 'evaluate' post.slug %}" class="text-decoration-none btn btn-primary">Evaluate</a></td>
+      <td>
+        <a href="{% url 'evaluate' post.slug %}" class="text-decoration-none btn btn-primary {% if not post.uploaded_by.is_active == True %}disabled{% endif %}">Evaluate</a>
+      </td>
     </tr>
     {% endfor %}        
 
