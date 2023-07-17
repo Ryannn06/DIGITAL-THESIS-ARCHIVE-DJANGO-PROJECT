@@ -2,33 +2,21 @@
 A Digital Thesis Archive for Technological University of The Philippines- Cavite created in Django Framework.
 
 ## Install Required Libraries
-This will handle the design for our form inputs
-> pip install django-crispy-forms
-
-This will handle for the django authenticaton
-> pip install django-allauth
-
-This plugin automatically removes the file from the local folder when deleted from the database.
-> django-cleanup==6.0.0
-
-django-email-verification==0.2.2
-
-django-hitcount==1.3.5
-
-django-livereload-server==0.4
-django-taggit==2.1.0
-django-taggit-autosuggest==0.3.8
-django-tags-input==5.1.0
-
-django-utils-six==2.0
-
-numpy==1.23.3
-
-opencv-python==4.6.0.66
-pandas==1.5.0
-Pillow==9.2.0
-
-whitenoise==6.2.0
+1. django-crispy-forms
+2. django-allauth
+3. django-cleanup==6.0.0
+4. django-email-verification==0.2.2
+5. django-hitcount==1.3.5
+6. django-livereload-server==0.4
+7. django-taggit==2.1.0
+8. django-taggit-autosuggest==0.3.8
+9. django-tags-input==5.1.0
+10. django-utils-six==2.0
+11. numpy==1.23.3
+12. opencv-python==4.6.0.66
+13. pandas==1.5.0
+14. Pillow==9.2.0
+15. whitenoise==6.2.0
 
 ## Run Devvelopment Server
 1. Launh XAMPP; start Apache and MySQL Server.
