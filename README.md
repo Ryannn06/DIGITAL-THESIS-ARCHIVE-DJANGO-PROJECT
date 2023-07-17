@@ -1,7 +1,9 @@
 # Thesis Archive Management System
 A Digital Thesis Archive for Technological University of The Philippines- Cavite created in Django Framework.
 
-## Install Required Libraries
+## Install Required Plugins
+To install a library or plugin, run:
+> pip install ( name of the plugin )
 1. django-crispy-forms
 2. django-allauth
 3. django-cleanup==6.0.0
