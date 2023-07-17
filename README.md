@@ -2,19 +2,17 @@
 A Digital Thesis Archive for Technological University of The Philippines- Cavite created in Django Framework.
 
 ## Install Required Libraries
-> pip install crispy-bootstrap
+This will handle the design for our form inputs
+> pip install django-crispy-forms
+This will handle for the django authenticaton
 > pip install django-allauth
-> pip install django-autocomplete-light
-django-autoslug==1.9.8
-django-bootstrap-modal-forms==2.2.0
-django-ckeditor==6.2.0
-django-cleanup==6.0.0
-django-crispy-forms==1.14.0
+This plugin automatically removes the file from the local folder when deleted from the database.
+> django-cleanup==6.0.0
+
 django-email-verification==0.2.2
-django-environ==0.8.1
-django-etc==1.4.0
+
 django-hitcount==1.3.5
-django-js-asset==2.0.0
+
 django-livereload-server==0.4
 django-taggit==2.1.0
 django-taggit-autosuggest==0.3.8
@@ -48,6 +46,7 @@ whitenoise==6.2.0
 This will create all the tables needed to operate the back-end of the application:
 To make migrations, run:
 > py manage.py makemigrations
+
 After a successful migration, run:
 > py manage.py migrate
 
