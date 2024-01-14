@@ -4,8 +4,8 @@ A Digital Thesis Archive for Technological University of The Philippines- Cavite
 ## Install Required Plugins
 To install a library or plugin, run:
 > pip install ( name of the plugin )
-1. django-crispy-forms
-2. django-allauth
+1. django-crispy-forms=3.7.2
+2. django-allauth-0.60.0
 3. django-cleanup==6.0.0
 4. django-email-verification==0.2.2
 5. django-hitcount==1.3.5
@@ -20,7 +20,7 @@ To install a library or plugin, run:
 14. Pillow==9.2.0
 15. whitenoise==6.2.0
 
-## Run Devvelopment Server
+## Run Development Server
 1. Launh XAMPP; start Apache and MySQL Server.
 2. On the command prompt, run:
 > py manage.py runserver
