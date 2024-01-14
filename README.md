@@ -19,6 +19,7 @@ To install a library or plugin, run:
 13. pandas==1.5.0
 14. Pillow==9.2.0
 15. whitenoise==6.2.0
+16. django-ckeditor
 
 ## Run Development Server
 1. Launh XAMPP; start Apache and MySQL Server.
