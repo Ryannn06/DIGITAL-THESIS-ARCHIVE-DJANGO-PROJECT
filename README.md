@@ -46,7 +46,6 @@ To make migrations, run:
 
 ### 4. After a successful migration, run:
 > py manage.py migrate
-
 <br/><br/>
 ## Key Features
 - Requires account registration with email verification to ensure the security of the electronic thesis documents. The user can only use the organizational email address which he will then be asked to verify.
