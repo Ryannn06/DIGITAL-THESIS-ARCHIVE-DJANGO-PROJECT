@@ -1,18 +1,14 @@
 # Thesis Archive Management System
-A Digital Thesis Archive for the Technological University of The Philippines- Cavite built in Django Framework.
-
-
+A Digital Thesis Archive for the Technological University of The Philippines- Cavite built in Django Framework. <br/><br/>
 ## Table of Contents
 - [General Information](#general-information)
 - [Technologies](#technologies)
 - [Installation and Setup](#installation-and-setup)
 - [Key Features](#key-features)
-
-
+<br/><br/>
 ## General Information
 It is a capstone project develops a web-based application for the management of electronic thesis documents of Technological University of the Philippines- Cavite. This system allows the uploading, updating, and displaying of electronic thesis doucments given granted access.The front-end of this application is developed with HTML, CSS and Bootstrap. Meanwhile, back-end utilizes Python, Django, XAMPP, MySQL and Apache server. 
-
-
+<br/><br/>
 ## Technologies
 Below are the notable dependencies used in this project:
 - django-crispy-forms=3.7.2
@@ -31,7 +27,7 @@ Below are the notable dependencies used in this project:
 - Pillow==9.2.0
 - whitenoise==6.2.0
 - django-ckeditor
-
+<br/><br/>
 ## Installation and Setup
 ### 1. Run Development Server
 1. Launh XAMPP; start Apache and MySQL Server.
@@ -50,7 +46,7 @@ To make migrations, run:
 
 ### 4. After a successful migration, run:
 > py manage.py migrate
-
+<br/><br/>
 ## Key Features
 - Requires account registration with email verification to ensure the security of the electronic thesis documents. The user can only use the organizational email address which he will then be asked to verify.
 - Tracks the number of views for every thesis as theyare being viewed based on viewer's IP address and active time.
