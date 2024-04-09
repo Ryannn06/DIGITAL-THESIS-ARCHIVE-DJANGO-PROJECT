@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig', #to clean file when updated
     'ckeditor',
     'hitcount',
+    'allauth',
     'taggit',
     'taggit_autosuggest',
     'members',
@@ -126,13 +127,13 @@ AUTH_USER_MODEL = 'libraryApp.Registrations'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'library',
-        'NAME': 'technorepository$default',
-        #'USER':'root',
-        'USER':'technorepository',
-        'PASSWORD':'gelo120601',
-        #'HOST':'localhost',
-        'HOST':'technorepository.mysql.pythonanywhere-services.com',
+        'NAME': 'library',
+        #'NAME': 'technorepository$default',
+        'USER':'root',
+        #'USER':'technorepository',
+        'PASSWORD':'',
+        'HOST':'localhost',
+        #'HOST':'technorepository.mysql.pythonanywhere-services.com',
         'PORT': '',
         #'OPTIONS': {
         # "init_command": "SET foreign_key_checks = 0;",

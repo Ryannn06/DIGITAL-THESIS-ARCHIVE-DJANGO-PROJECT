@@ -968,7 +968,7 @@ class AdminThesisCreate(AdminThesisInline, CreateView):
     def get_named_formsets(self):
         if self.request.method == "GET":
             return {
-                'variants': AuthorFormSet(prefix='variants'),
+                'variants': AuthorFormSet(prefix='variants')
             }
         else:
             return {
