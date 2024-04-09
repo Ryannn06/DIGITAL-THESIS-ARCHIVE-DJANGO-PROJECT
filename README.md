@@ -1,5 +1,5 @@
 # Thesis Archive Management System
-A Digital Thesis Archive for the Technological University of The Philippines- Cavite built in Django Framework. Visit the prototype site [here].(https://thesisarchive.pythonanywhere.com) <br/><br/>
+A Digital Thesis Archive for the Technological University of The Philippines- Cavite built in Django Framework. Visit the prototype site [here](https://thesisarchive.pythonanywhere.com). <br/><br/>
 ## Table of Contents
 - [General Information](#general-information)
 - [Technologies](#technologies)
