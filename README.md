@@ -1,5 +1,5 @@
 # Thesis Archive Management System
-A Digital Thesis Archive for the Technological University of The Philippines- Cavite built in Django Framework. <br/><br/>
+A Digital Thesis Archive for the Technological University of The Philippines- Cavite built in Django Framework. Visit the prototype site [here].(https://thesisarchive.pythonanywhere.com) <br/><br/>
 ## Table of Contents
 - [General Information](#general-information)
 - [Technologies](#technologies)
@@ -11,6 +11,7 @@ It is a capstone project develops a web-based application for the management of 
 <br/><br/>
 ## Technologies
 Below are the notable dependencies used in this project:
+- django==4.0.1
 - django-crispy-forms=3.7.2
 - django-allauth-0.60.0
 - django-cleanup==6.0.0
@@ -26,6 +27,7 @@ Below are the notable dependencies used in this project:
 - pandas==1.5.0
 - Pillow==9.2.0
 - whitenoise==6.2.0
+- crispy-bootstrap4
 - django-ckeditor
 <br/><br/>
 ## Installation and Setup
